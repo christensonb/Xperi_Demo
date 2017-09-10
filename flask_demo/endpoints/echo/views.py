@@ -15,6 +15,9 @@ ECHO = Blueprint('test', __name__)
 @ECHO.route('/')
 @ECHO.route('/timestamp')
 def timestamp():
+    """
+    :return: str of HTML code for a simple Hello World
+    """
     now = datetime_to_str(cst_now(),"%Y-%m-%d %H:%M:%S")
     log.debug("timestamp: "+now)
     return '<body><h1>Hello World:  %s/Flask  </h1>%s</body>'%(configuration.name, now)

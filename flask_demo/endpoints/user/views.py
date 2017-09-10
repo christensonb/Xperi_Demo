@@ -23,10 +23,10 @@ def get():
 def login(username, password, email=None):
     """
         This will process logging the user in
-    :param username:     str of the username
-    :param password:     str of the password
-    :param email:        str of the email as an alternative to username
-    :return:             User dict
+    :param username: str of the username
+    :param password: str of the password
+    :param email:    str of the email as an alternative to username
+    :return:         User dict
     """
     if email and username == "":
         existing_users = User.query.filter_by(email=email).all()
@@ -52,7 +52,7 @@ def login(username, password, email=None):
             return existing_user
         else:
             pass
-    raise UnauthorizedException(password='Invalid Password: %s'%password)
+    raise UnauthorizedException(password='Invalid Password: %s' % password)
 
 
 @USER.route('/user/login/email', methods=['POST'])
@@ -60,9 +60,9 @@ def login(username, password, email=None):
 def login_by_email(email, password):
     """
         This will process logging the user in
-    :param email:        str of the email as an alternative to username
-    :param password:     str of the password
-    :return:             User dict
+    :param email:    str of the email as an alternative to username
+    :param password: str of the password
+    :return:         User dict
     """
     return login._undecorated(username="", password=password, email=email)
 
@@ -102,21 +102,21 @@ def delete(user_id=None):
 def create(username, password, email=None, full_name=None):
     """
         This will create a PnP user
-    :param username:         str of the username give my the player
-    :param password:         str of the password which will be hashed
-    :param email:            str of the user's email address
-    :param full_name:        str of the full name
-    :return:                 User dict of the user created
+    :param username:  str of the username give my the player
+    :param password:  str of the password which will be hashed
+    :param email:     str of the user's email address
+    :param full_name: str of the full name
+    :return:          User dict of the user created
     """
     if email:
         users = User.query.filter(or_(User.username == username,
                                       User.email == email)).all()
     else:
-        users = User.query.filter_by(username = username).all()
+        users = User.query.filter_by(username=username).all()
 
     if not users:
         users = [User(username=username, _password_hash=generate_password_hash(password),
-                      full_name = full_name or username)]
+                      full_name=full_name or username)]
 
     for user in users:
         if user.check_password(password):
@@ -148,11 +148,11 @@ def create(username, password, email=None, full_name=None):
 def update(username=None, email=None, full_name=None, password=None):
     """
         This will update a PnP user
-    :param username:         str of the username give my the player
-    :param email:            str of the user's email address
-    :param full_name:        str of the full name
-    :param password:         str of the password which will be hashed
-    :return:                 User dict of the user updated
+    :param username:  str of the username give my the player
+    :param email:     str of the user's email address
+    :param full_name: str of the full name
+    :param password:  str of the password which will be hashed
+    :return:          User dict of the user updated
     """
     conditions = [User.user_id == current_user.user_id]
     if username is not None:
@@ -168,7 +168,7 @@ def update(username=None, email=None, full_name=None, password=None):
         raise ForbiddenException("Email address (%s) is already being used" % email)
 
     if len(users) > 1:
-        raise UnauthorizedException("Username (%s) is already being used"%username)
+        raise UnauthorizedException("Username (%s) is already being used" % username)
 
     user = users[0]
     for k, v in function_kwargs(exclude_keys=['password']).items():
@@ -188,15 +188,16 @@ def update(username=None, email=None, full_name=None, password=None):
 
 @USER.route('/user/admin', methods=['GET', 'PUT', 'POST'])
 @api_endpoint(auth='Admin', validator=User, html='user/admin_update.html', commit=True, add=True)
-def admin_update(username, email=None, full_name=None, password=None, status=None, user_id=None):
+def admin_update(username, email=None, full_name=None, password=None, status=None, auth_level=None, user_id=None):
     """
-    :param username:       str of the username give my the player
-    :param email:          str of the user's email address
-    :param full_name:      str of the full name
-    :param password:       str of the encrypted password
-    :param status:         str of the enum status ['active', 'suspended', 'closed']
-    :param user_id:        int of the user_id to update
-    :return:               User dict of the user updated by admin
+    :param username:   str of the username give my the player
+    :param email:      str of the user's email address
+    :param full_name:  str of the full name
+    :param password:   str of the encrypted password
+    :param status:     str of the enum status ['Active', 'Suspended']
+    :param auth_level: str of the enum auth_level ['User', 'Demo', 'Superuser', 'Admin']
+    :param user_id:    int of the user_id to update
+    :return:           User dict of the user updated by admin
     """
     kwargs = function_kwargs(exclude_keys='password')
     if password:
@@ -209,10 +210,10 @@ def admin_update(username, email=None, full_name=None, password=None, status=Non
 @api_endpoint('Admin')
 def get_array(user_ids=None, usernames=None, status=None):
     """
-    :param user_ids:         list of int of the user_ids to return
-    :param usernames:        list of str of the usernames to return
-    :param status:           str of the status
-    :return:                 list of User
+    :param user_ids:  list of int of the user_ids to return
+    :param usernames: list of str of the usernames to return
+    :param status:    str of the status
+    :return:          list of User
     """
     query = User.query
 

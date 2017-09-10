@@ -23,6 +23,7 @@ DEBUG_SERVER = 'http://127.0.0.1:4999'
 AWS_SERVER = 'http://%s'
 AWS_SERVER_SSL = 'https://api.puzzlesandpotions.com'
 
+
 class BaseTest(TestChain):
     thread = None
     SERVER = DEBUG_SERVER

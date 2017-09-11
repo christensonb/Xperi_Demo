@@ -3,9 +3,9 @@
 """
 from settings.global_import import *
 from seaborn.timestamp import datetime_to_str
+
 log.trace("Importing endpoint echo.views")
 from .models import Echo
-
 
 ECHO = Blueprint('test', __name__)
 
@@ -16,9 +16,9 @@ def timestamp():
     """
     :return: str of HTML code for a simple Hello World
     """
-    now = datetime_to_str(cst_now(),"%Y-%m-%d %H:%M:%S")
-    log.debug("timestamp: "+now)
-    return '<body><h1>Hello World:  %s/Flask  </h1>%s</body>'%(configuration.name, now)
+    now = datetime_to_str(cst_now(), "%Y-%m-%d %H:%M:%S")
+    log.debug("timestamp: " + now)
+    return '<body><h1>Hello World:  %s/Flask  </h1>%s</body>' % (configuration.name, now)
 
 
 @ECHO.route('/echo')
@@ -87,7 +87,7 @@ def put_message(key='hello', value='world'):
     :return:        Echo dict of the key value stored
     """
     test = Echo.get_or_create(dict(echo_value=value), echo_key=key)
-    log.debug("echo DB: %s"%id(db))
+    log.debug("echo DB: %s" % id(db))
     return test
 
 
@@ -175,5 +175,3 @@ def get_array_float2():
     :return:       list of float to test
     """
     return [1.1, 2.2, 3.3]
-
-

@@ -30,6 +30,7 @@ import json
 
 log.trace("importing configuration")
 from .config import configuration
+
 configuration.setup_logging()
 
 log.trace("setting up the flask app")

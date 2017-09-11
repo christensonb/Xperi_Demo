@@ -17,15 +17,15 @@ except Exception as ex:
 try:
     import endpoints
 except Exception as ex:
-    log.error("Exception in importing endpoints with %s\n\n%s"% (ex, traceback.format_exc()))
-    print("Exception in importing endpoints with %s\n\n%s"% (ex, traceback.format_exc()))
+    log.error("Exception in importing endpoints with %s\n\n%s" % (ex, traceback.format_exc()))
+    print("Exception in importing endpoints with %s\n\n%s" % (ex, traceback.format_exc()))
     sys.exit()
 
 try:
     run = setup_flask.setup_run(endpoints)
 except Exception as ex:
-    log.error("Exception in setup flask with %s\n\n%s"% (ex, traceback.format_exc()))
-    print("Exception in setup flask with %s\n\n%s"% (ex, traceback.format_exc()))
+    log.error("Exception in setup flask with %s\n\n%s" % (ex, traceback.format_exc()))
+    print("Exception in setup flask with %s\n\n%s" % (ex, traceback.format_exc()))
     sys.exit()
 
 if __name__ == '__main__':

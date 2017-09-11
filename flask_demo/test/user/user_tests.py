@@ -36,7 +36,7 @@ class UserTest(BaseTest):
 
     def test_user_update_username(self, username='ben'):
         ben = self.test_user_signup(username)
-        updated_name = '%s_updated'%username
+        updated_name = '%s_updated' % username
         user = ben.user.post(username=updated_name)
         self.assertEqual(user['username'], updated_name, 'Failed to set the username')
         user = ben.user.get()
@@ -45,24 +45,23 @@ class UserTest(BaseTest):
         user = ben.user.post(username=username)
 
     def test_user_update_password(self, username='password_update'):
-        updated_password = '%s_updated'%self.local_data.user_password
+        updated_password = '%s_updated' % self.local_data.user_password
         conn = self.test_user_signup(username, self.local_data.user_password)
         user = conn.user.post(password=updated_password)
         conn.user.login.post(user['username'], updated_password)
         user = conn.user.post(password=self.local_data.user_password)
 
     def test_user_logout(self):
-        conn = Connection('Demo-User',self.local_data.user_password, base_uri=self.SERVER, timeout=self.TIMEOUT,
-                               login_url='user/login')
+        conn = Connection('Demo-User', self.local_data.user_password, base_uri=self.SERVER, timeout=self.TIMEOUT,
+                          login_url='user/login')
         user = conn.user.get()
         self.assertEqual(conn.user_id, user['user_id'], 'Failed to make sure we started out logged in')
 
         conn.user.logout.post()
 
         try:
-            user = conn.user.get() # this is suppose to fail because we are logged out
+            user = conn.user.get()  # this is suppose to fail because we are logged out
         except Exception as ex:
             return
 
         raise BaseException("Failed to fail at getting user info while logged out")
-

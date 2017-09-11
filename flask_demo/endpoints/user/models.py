@@ -15,6 +15,7 @@ AUTH_LEVELS_ENUM = ['User',  # someone who has is a basic user
 USER_STATUS_ENUM = ['Active',
                     'Suspended']
 
+
 class User(db.Model, ApiModel):
     __tablename__ = "usr"
     user_id = db.Column(db.Integer, primary_key=True)

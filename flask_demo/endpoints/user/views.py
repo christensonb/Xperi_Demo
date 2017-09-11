@@ -120,7 +120,7 @@ def create(username, password, email=None, full_name=None):
 
     if not users:
         users = [User(username=username, _password_hash=generate_password_hash(password),
-                      full_name=full_name or username, status = 'Active')]
+                      full_name=full_name or username, status='Active')]
 
     for user in users:
         if user.check_password(password):

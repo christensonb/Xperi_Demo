@@ -5,7 +5,7 @@
 __author__ = 'Ben Christenson'
 __date__ = "9/11/17"
 import sys
-from .run_flask import setup_flask
+from run_flask import setup_flask
 from seaborn.flask.setup.manager import setup_manager
 
 

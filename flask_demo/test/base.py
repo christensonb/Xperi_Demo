@@ -52,8 +52,6 @@ class BaseTest(TestChain):
 
     @classmethod
     def _get_flask_run(cls):
-        from settings.config import TestConfig
-        os.environ['flask_config'] = TestConfig.__name__
         from settings.global_import import setup_flask
         return setup_flask()
 
@@ -70,9 +68,9 @@ class BaseTest(TestChain):
 
     @classmethod
     def _spawn_thread_flask(cls):
-        import _thread
+        import thread
         run = cls._get_flask_run()
-        _thread.start_new_thread(run,())
+        thread.start_new_thread(run,())
 
     @classmethod
     def tearDownClass(cls):

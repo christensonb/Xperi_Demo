@@ -45,6 +45,362 @@ namespace demo.BenChristenson.placeholder
 
         
 
+        public static void AccountTransferArrayGet(
+            int account_id,                         // int of the account_id to get transfer for
+            bool? withdraws_only = null,            // bool if true only gets withdraw transfer if false only gets deposit, default gets both
+            int? offset = null,                     // int of the offset to use
+            int? limit = null)                      // int of max number of puzzles to return
+        {   
+            if (benChristenson.accountTransferArrayGet == null){
+                benChristenson.accountTransferArrayGet = m_instance.gameObject.AddComponent<behaviors.AccountTransferArrayGet>();
+                benChristenson.accountTransferArrayGet.DestroyOnComplete = benChristensonApiInitialize.is_behavior_destroyed_on_complete();
+            }
+
+            
+            if(m_logLevel>3)
+                Debug.Log(Prefix()+"AccountTransferArrayGet started");
+
+            benChristenson.accountTransferArrayGet.Spawn(account_id, withdraws_only, offset, limit, 
+                                       Callback: new Action<operations.AccountTransferArrayGet, HttpResponse> ((operation, response) =>
+            {
+                try
+                {
+                    if (response.HasError)
+                    {
+                        if(m_logLevel>1)
+                            Debug.LogError(Prefix()+"AccountTransferArrayGet failed " + response.Error);
+                    }
+                    else
+                    {
+                        List<models.Transfer> responseData = operation.responseData; // list of Transfer dict
+                        if(m_logLevel>2)
+                            Debug.Log(Prefix()+"AccountTransferArrayGet completed Successfully with " + "List<models.Transfer> of size " + responseData.Count.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if(m_logLevel>0)
+                        Debug.LogError(Prefix()+"AccountTransferArrayGet failed in response with: "+ex.ToString());
+                }
+            }));
+        }
+        
+
+        public static void AccountTransferGet(
+            int transfer_id)                        // int of the id for the transfer
+        {   
+            if (benChristenson.accountTransferGet == null){
+                benChristenson.accountTransferGet = m_instance.gameObject.AddComponent<behaviors.AccountTransferGet>();
+                benChristenson.accountTransferGet.DestroyOnComplete = benChristensonApiInitialize.is_behavior_destroyed_on_complete();
+            }
+
+            
+            if(m_logLevel>3)
+                Debug.Log(Prefix()+"AccountTransferGet started");
+
+            benChristenson.accountTransferGet.Spawn(transfer_id, 
+                                       Callback: new Action<operations.AccountTransferGet, HttpResponse> ((operation, response) =>
+            {
+                try
+                {
+                    if (response.HasError)
+                    {
+                        if(m_logLevel>1)
+                            Debug.LogError(Prefix()+"AccountTransferGet failed " + response.Error);
+                    }
+                    else
+                    {
+                        models.Transfer responseData = operation.responseData;    // Transfer dict
+                        if(m_logLevel>2)
+                            Debug.Log(Prefix()+"AccountTransferGet completed Successfully with " + responseData.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if(m_logLevel>0)
+                        Debug.LogError(Prefix()+"AccountTransferGet failed in response with: "+ex.ToString());
+                }
+            }));
+        }
+        
+
+        public static void AccountTransferPut(
+            int withdraw_acount_id,                 // int of the account_id to withdraw the money from
+            int deposit_account_id,                 // int of the account_id to deposit the moeny to
+            float amount)                           // float of the amount to transfer
+        {   
+            if (benChristenson.accountTransferPut == null){
+                benChristenson.accountTransferPut = m_instance.gameObject.AddComponent<behaviors.AccountTransferPut>();
+                benChristenson.accountTransferPut.DestroyOnComplete = benChristensonApiInitialize.is_behavior_destroyed_on_complete();
+            }
+
+            
+            if(m_logLevel>3)
+                Debug.Log(Prefix()+"AccountTransferPut started");
+
+            benChristenson.accountTransferPut.Spawn(withdraw_acount_id, deposit_account_id, amount, 
+                                       Callback: new Action<operations.AccountTransferPut, HttpResponse> ((operation, response) =>
+            {
+                try
+                {
+                    if (response.HasError)
+                    {
+                        if(m_logLevel>1)
+                            Debug.LogError(Prefix()+"AccountTransferPut failed " + response.Error);
+                    }
+                    else
+                    {
+                        models.Transfer responseData = operation.responseData;    // Transfer dict
+                        if(m_logLevel>2)
+                            Debug.Log(Prefix()+"AccountTransferPut completed Successfully with " + responseData.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if(m_logLevel>0)
+                        Debug.LogError(Prefix()+"AccountTransferPut failed in response with: "+ex.ToString());
+                }
+            }));
+        }
+        
+
+        public static void AccountAccessArrayGet(
+            int account_id)                         // int of the account_id for the account
+        {   /*
+			This will return all users who have access to the account, only the primary can do this command
+			*/
+            if (benChristenson.accountAccessArrayGet == null){
+                benChristenson.accountAccessArrayGet = m_instance.gameObject.AddComponent<behaviors.AccountAccessArrayGet>();
+                benChristenson.accountAccessArrayGet.DestroyOnComplete = benChristensonApiInitialize.is_behavior_destroyed_on_complete();
+            }
+
+            
+            if(m_logLevel>3)
+                Debug.Log(Prefix()+"AccountAccessArrayGet started");
+
+            benChristenson.accountAccessArrayGet.Spawn(account_id, 
+                                       Callback: new Action<operations.AccountAccessArrayGet, HttpResponse> ((operation, response) =>
+            {
+                try
+                {
+                    if (response.HasError)
+                    {
+                        if(m_logLevel>1)
+                            Debug.LogError(Prefix()+"AccountAccessArrayGet failed " + response.Error);
+                    }
+                    else
+                    {
+                        List<models.User> responseData = operation.responseData;  // list of User dict
+                        if(m_logLevel>2)
+                            Debug.Log(Prefix()+"AccountAccessArrayGet completed Successfully with " + "List<models.User> of size " + responseData.Count.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if(m_logLevel>0)
+                        Debug.LogError(Prefix()+"AccountAccessArrayGet failed in response with: "+ex.ToString());
+                }
+            }));
+        }
+        
+
+        public static void AccountAccessPut(
+            int account_id,                         // int of the account_id for the account
+            int user_id)                            // int of the user_id to grant access
+        {   /*
+			Only the primary on the account can add or remove user's access to an account
+			*/
+            if (benChristenson.accountAccessPut == null){
+                benChristenson.accountAccessPut = m_instance.gameObject.AddComponent<behaviors.AccountAccessPut>();
+                benChristenson.accountAccessPut.DestroyOnComplete = benChristensonApiInitialize.is_behavior_destroyed_on_complete();
+            }
+
+            
+            if(m_logLevel>3)
+                Debug.Log(Prefix()+"AccountAccessPut started");
+
+            benChristenson.accountAccessPut.Spawn(account_id, user_id, 
+                                       Callback: new Action<operations.AccountAccessPut, HttpResponse> ((operation, response) =>
+            {
+                try
+                {
+                    if (response.HasError)
+                    {
+                        if(m_logLevel>1)
+                            Debug.LogError(Prefix()+"AccountAccessPut failed " + response.Error);
+                    }
+                    else
+                    {
+                        models.Access responseData = operation.responseData;      // Access dict
+                        if(m_logLevel>2)
+                            Debug.Log(Prefix()+"AccountAccessPut completed Successfully with " + responseData.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if(m_logLevel>0)
+                        Debug.LogError(Prefix()+"AccountAccessPut failed in response with: "+ex.ToString());
+                }
+            }));
+        }
+        
+
+        public static void AccountAccessDelete(
+            int account_id,                         // int of the account_id for the account
+            int user_id)                            // int of the user_id to grant access
+        {   /*
+			Only the primary on the account can add or remove user's access to an account
+			*/
+            if (benChristenson.accountAccessDelete == null){
+                benChristenson.accountAccessDelete = m_instance.gameObject.AddComponent<behaviors.AccountAccessDelete>();
+                benChristenson.accountAccessDelete.DestroyOnComplete = benChristensonApiInitialize.is_behavior_destroyed_on_complete();
+            }
+
+            
+            if(m_logLevel>3)
+                Debug.Log(Prefix()+"AccountAccessDelete started");
+
+            benChristenson.accountAccessDelete.Spawn(account_id, user_id, 
+                                       Callback: new Action<operations.AccountAccessDelete, HttpResponse> ((operation, response) =>
+            {
+                try
+                {
+                    if (response.HasError)
+                    {
+                        if(m_logLevel>1)
+                            Debug.LogError(Prefix()+"AccountAccessDelete failed " + response.Error);
+                    }
+                    else
+                    {
+                        models.Access responseData = operation.responseData;      // Access dict
+                        if(m_logLevel>2)
+                            Debug.Log(Prefix()+"AccountAccessDelete completed Successfully with " + responseData.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if(m_logLevel>0)
+                        Debug.LogError(Prefix()+"AccountAccessDelete failed in response with: "+ex.ToString());
+                }
+            }));
+        }
+        
+
+        public static void AccountArrayGet()
+        {   
+            if (benChristenson.accountArrayGet == null){
+                benChristenson.accountArrayGet = m_instance.gameObject.AddComponent<behaviors.AccountArrayGet>();
+                benChristenson.accountArrayGet.DestroyOnComplete = benChristensonApiInitialize.is_behavior_destroyed_on_complete();
+            }
+
+            
+            if(m_logLevel>3)
+                Debug.Log(Prefix()+"AccountArrayGet started");
+
+            benChristenson.accountArrayGet.Spawn(
+                                       Callback: new Action<operations.AccountArrayGet, HttpResponse> ((operation, response) =>
+            {
+                try
+                {
+                    if (response.HasError)
+                    {
+                        if(m_logLevel>1)
+                            Debug.LogError(Prefix()+"AccountArrayGet failed " + response.Error);
+                    }
+                    else
+                    {
+                        List<models.Account> responseData = operation.responseData; // list of Account dict the current user has access to
+                        if(m_logLevel>2)
+                            Debug.Log(Prefix()+"AccountArrayGet completed Successfully with " + "List<models.Account> of size " + responseData.Count.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if(m_logLevel>0)
+                        Debug.LogError(Prefix()+"AccountArrayGet failed in response with: "+ex.ToString());
+                }
+            }));
+        }
+        
+
+        public static void AccountGet(
+            int account_id)                         // int of the account to get
+        {   
+            if (benChristenson.accountGet == null){
+                benChristenson.accountGet = m_instance.gameObject.AddComponent<behaviors.AccountGet>();
+                benChristenson.accountGet.DestroyOnComplete = benChristensonApiInitialize.is_behavior_destroyed_on_complete();
+            }
+
+            
+            if(m_logLevel>3)
+                Debug.Log(Prefix()+"AccountGet started");
+
+            benChristenson.accountGet.Spawn(account_id, 
+                                       Callback: new Action<operations.AccountGet, HttpResponse> ((operation, response) =>
+            {
+                try
+                {
+                    if (response.HasError)
+                    {
+                        if(m_logLevel>1)
+                            Debug.LogError(Prefix()+"AccountGet failed " + response.Error);
+                    }
+                    else
+                    {
+                        models.Account responseData = operation.responseData;     // Account dict of the account
+                        if(m_logLevel>2)
+                            Debug.Log(Prefix()+"AccountGet completed Successfully with " + responseData.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if(m_logLevel>0)
+                        Debug.LogError(Prefix()+"AccountGet failed in response with: "+ex.ToString());
+                }
+            }));
+        }
+        
+
+        public static void AccountPut(
+            string name = null,                     // str of name for the account, defaults to the created timestamp
+            List<int> user_ids = null)              // list of int of users to give access to this account defaults to current user
+        {   
+            if (benChristenson.accountPut == null){
+                benChristenson.accountPut = m_instance.gameObject.AddComponent<behaviors.AccountPut>();
+                benChristenson.accountPut.DestroyOnComplete = benChristensonApiInitialize.is_behavior_destroyed_on_complete();
+            }
+
+            if(user_ids != null && user_ids.Count == 0)
+                user_ids = null;
+            if(m_logLevel>3)
+                Debug.Log(Prefix()+"AccountPut started");
+
+            benChristenson.accountPut.Spawn(name, user_ids, 
+                                       Callback: new Action<operations.AccountPut, HttpResponse> ((operation, response) =>
+            {
+                try
+                {
+                    if (response.HasError)
+                    {
+                        if(m_logLevel>1)
+                            Debug.LogError(Prefix()+"AccountPut failed " + response.Error);
+                    }
+                    else
+                    {
+                        models.Account responseData = operation.responseData;     // Account dict created
+                        if(m_logLevel>2)
+                            Debug.Log(Prefix()+"AccountPut completed Successfully with " + responseData.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if(m_logLevel>0)
+                        Debug.LogError(Prefix()+"AccountPut failed in response with: "+ex.ToString());
+                }
+            }));
+        }
+        
+
         public static void EchoMessageGet(
             string message = "hello")               // str of the message to echo
         {   /*

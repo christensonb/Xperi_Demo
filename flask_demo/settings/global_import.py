@@ -10,7 +10,7 @@ from seaborn.flask.decorators import api_endpoint, MEMCACHE
 from seaborn.flask.blueprint import ProxyEndpoint
 from seaborn.flask.blueprint import BlueprintBinding as Blueprint
 from seaborn.rest.errors import *
-from seaborn.timestamp import cst_now
+from seaborn.timestamp import cst_now, datetime_to_str
 from seaborn.flask.setup.setup_flask import SetupFlask
 from seaborn.flask.models import ApiModel
 from seaborn.calling_function import function_kwargs

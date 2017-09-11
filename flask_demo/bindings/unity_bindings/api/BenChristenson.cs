@@ -15,7 +15,16 @@ namespace demo.BenChristenson
 {
 	public class  BenChristenson : MonoBehaviour
 	{
-	    public behaviors.EchoMessageGet echoMessageGet;
+	    public behaviors.AccountTransferArrayGet accountTransferArrayGet;
+        public behaviors.AccountTransferGet accountTransferGet;
+        public behaviors.AccountTransferPut accountTransferPut;
+        public behaviors.AccountAccessArrayGet accountAccessArrayGet;
+        public behaviors.AccountAccessPut accountAccessPut;
+        public behaviors.AccountAccessDelete accountAccessDelete;
+        public behaviors.AccountArrayGet accountArrayGet;
+        public behaviors.AccountGet accountGet;
+        public behaviors.AccountPut accountPut;
+        public behaviors.EchoMessageGet echoMessageGet;
         public behaviors.EchoGet echoGet;
         public behaviors.UserLoginEmailPost userLoginEmailPost;
         public behaviors.UserLogoutPost userLogoutPost;
@@ -29,7 +38,16 @@ namespace demo.BenChristenson
             BenChristensonApiInitialize benChristensonApiInitialize = GetComponent<BenChristensonApiInitialize>();
             if (benChristensonApiInitialize.is_behaviors_created_at_startup())
             {
-			    echoMessageGet = gameObject.AddComponent<behaviors.EchoMessageGet>();
+			    accountTransferArrayGet = gameObject.AddComponent<behaviors.AccountTransferArrayGet>();
+                accountTransferGet = gameObject.AddComponent<behaviors.AccountTransferGet>();
+                accountTransferPut = gameObject.AddComponent<behaviors.AccountTransferPut>();
+                accountAccessArrayGet = gameObject.AddComponent<behaviors.AccountAccessArrayGet>();
+                accountAccessPut = gameObject.AddComponent<behaviors.AccountAccessPut>();
+                accountAccessDelete = gameObject.AddComponent<behaviors.AccountAccessDelete>();
+                accountArrayGet = gameObject.AddComponent<behaviors.AccountArrayGet>();
+                accountGet = gameObject.AddComponent<behaviors.AccountGet>();
+                accountPut = gameObject.AddComponent<behaviors.AccountPut>();
+                echoMessageGet = gameObject.AddComponent<behaviors.EchoMessageGet>();
                 echoGet = gameObject.AddComponent<behaviors.EchoGet>();
                 userLoginEmailPost = gameObject.AddComponent<behaviors.UserLoginEmailPost>();
                 userLogoutPost = gameObject.AddComponent<behaviors.UserLogoutPost>();

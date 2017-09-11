@@ -59,7 +59,6 @@ class User(db.Model, ApiModel):
         """
         try:
             if AUTH_LEVELS_ENUM.index(self.auth_level) < AUTH_LEVELS_ENUM.index(auth_level):
-                self._suspect += 1
                 db.session.add(self)
                 db.session.commit()
                 return False

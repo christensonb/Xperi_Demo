@@ -25,4 +25,3 @@ class AccountTest(BaseTest):
         user, account = self.test_create_account()
         accounts = user.account.array.get()
         self.assertIn(account, accounts)
-

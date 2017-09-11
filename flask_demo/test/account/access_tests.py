@@ -8,8 +8,8 @@ from .account_tests import AccountTest
 
 
 class AccessTest(AccountTest):
-    def test_create_access(self, name="create_account"):
-        user, account = self.test_create_account()
+    def test_create_access(self, username="Demo-User", account_name="demo_account"):
+        user, account = self.test_create_account(username, account_name)
         other_user = self.test_login('Demo-User2')
 
         try:

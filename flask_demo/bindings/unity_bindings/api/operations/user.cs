@@ -122,6 +122,28 @@ namespace demo.BenChristenson.operations
 	}
 
 	
+	[HttpGET]
+	[HttpPath("BenChristenson","user")]
+	public class UserGet: HttpOperation
+	{
+	    
+
+		[HttpResponseJsonBody]
+		public models.User responseData;        // User dict of the current user
+
+		public UserGet SetParameters()
+		{
+		    
+			return this;
+		}
+
+		protected override void FromResponse(HttpResponse response)
+		{
+			base.FromResponse(response);
+		}
+	}
+
+	
 	[HttpPOST]
 	[HttpPath("BenChristenson","user")]
 	public class UserPost: HttpOperation

@@ -11,6 +11,7 @@ USER = Blueprint('user', __name__)
 
 
 @USER.route('/user', methods=['GET'])
+@api_endpoint(auth='User')
 def get():
     """
     :return: User dict of the current user
@@ -19,7 +20,7 @@ def get():
 
 
 @USER.route('/user/login', methods=['POST'])
-@api_endpoint(auth='Anonymous', redirect='/', html='user/login.html')
+@api_endpoint(auth='Anonymous')
 def login(username, password, email=None):
     """
         This will process logging the user in
@@ -44,7 +45,7 @@ def login(username, password, email=None):
 
     for existing_user in existing_users:
         if existing_user.check_password(password):
-            if existing_user.status != 'Active':
+            if not existing_user.is_active:
                 raise ForbiddenException("This account is not active")
 
             login_user(existing_user, remember=True)
@@ -56,7 +57,7 @@ def login(username, password, email=None):
 
 
 @USER.route('/user/login/email', methods=['POST'])
-@api_endpoint(auth='Anonymous', redirect='/', html='user/login.html')
+@api_endpoint(auth='Anonymous')
 def login_by_email(email, password):
     """
         This will process logging the user in
@@ -74,15 +75,8 @@ def logout():
         This will log the user out
     :return: str of a message saying success
     """
-    if 'username' in session:
-        session.pop('username')
-    for device in current_user.devices:
-        if device.active:
-            device.active = False
-            db.session.add(device)
-            db.session.commit()
-
-    return {'status': 'Successfully logged out'}
+    session.pop('_id', None)
+    return 'Successfully logged out'
 
 
 @USER.route('/user', methods=['DELETE'])
@@ -116,11 +110,11 @@ def create(username, password, email=None, full_name=None):
 
     if not users:
         users = [User(username=username, _password_hash=generate_password_hash(password),
-                      full_name=full_name or username)]
+                      full_name=full_name or username, status = 'Active')]
 
     for user in users:
         if user.check_password(password):
-            if user.status != 'active':
+            if not user.is_active:
                 raise ForbiddenException("This user exists, but is not active")
 
             user.full_name = full_name or user.full_name

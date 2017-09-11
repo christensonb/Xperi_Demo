@@ -155,6 +155,12 @@ class User(Endpoint):
     logout = User_Logout()
     signup = User_Signup()
 
+    def get(self):
+        """
+        :return: User dict of the current user
+        """
+        return self.connection.get('user')
+
     def delete(self, user_id=None):
         """
             This will delete a user from the Database

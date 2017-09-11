@@ -289,6 +289,43 @@ namespace demo.BenChristenson.placeholder
         }
         
 
+        public static void UserGet()
+        {   
+            if (benChristenson.userGet == null){
+                benChristenson.userGet = m_instance.gameObject.AddComponent<behaviors.UserGet>();
+                benChristenson.userGet.DestroyOnComplete = benChristensonApiInitialize.is_behavior_destroyed_on_complete();
+            }
+
+            
+            if(m_logLevel>3)
+                Debug.Log(Prefix()+"UserGet started");
+
+            benChristenson.userGet.Spawn(
+                                       Callback: new Action<operations.UserGet, HttpResponse> ((operation, response) =>
+            {
+                try
+                {
+                    if (response.HasError)
+                    {
+                        if(m_logLevel>1)
+                            Debug.LogError(Prefix()+"UserGet failed " + response.Error);
+                    }
+                    else
+                    {
+                        models.User responseData = operation.responseData;        // User dict of the current user
+                        if(m_logLevel>2)
+                            Debug.Log(Prefix()+"UserGet completed Successfully with " + responseData.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if(m_logLevel>0)
+                        Debug.LogError(Prefix()+"UserGet failed in response with: "+ex.ToString());
+                }
+            }));
+        }
+        
+
         public static void UserPost(
             string username = null,                 // str of the username give my the player
             string email = null,                    // str of the user's email address

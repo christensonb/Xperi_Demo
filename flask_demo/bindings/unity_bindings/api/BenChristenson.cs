@@ -21,6 +21,7 @@ namespace demo.BenChristenson
         public behaviors.UserLogoutPost userLogoutPost;
         public behaviors.UserSignupPut userSignupPut;
         public behaviors.UserLoginPost userLoginPost;
+        public behaviors.UserGet userGet;
         public behaviors.UserPost userPost;
 
 		public virtual void Awake()
@@ -34,6 +35,7 @@ namespace demo.BenChristenson
                 userLogoutPost = gameObject.AddComponent<behaviors.UserLogoutPost>();
                 userSignupPut = gameObject.AddComponent<behaviors.UserSignupPut>();
                 userLoginPost = gameObject.AddComponent<behaviors.UserLoginPost>();
+                userGet = gameObject.AddComponent<behaviors.UserGet>();
                 userPost = gameObject.AddComponent<behaviors.UserPost>();
 			}
 		}

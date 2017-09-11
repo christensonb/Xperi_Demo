@@ -329,6 +329,79 @@ namespace demo.BenChristenson.behaviors
 	}
 
 	
+	public class UserGet: ApiBehavior<UserGet>
+	{
+		public operations.UserGet operation;
+		private int count;   			// count of the number of concurrent calls happening right now
+		public bool DestroyOnComplete = false;
+	    private Action<operations.UserGet, HttpResponse>  Callback;
+
+	    
+
+		public models.User responseData;        // User dict of the current user
+
+		private void OnSuccess(operations.UserGet operation, HttpResponse response)
+		{
+			responseData = operation.responseData;
+			Status = ApiBehaviorStatus.SUCCESS;
+		}
+
+		private void OnFail(operations.UserGet operation, HttpResponse response)
+		{
+			responseData = null;
+			Status = ApiBehaviorStatus.FAILURE;
+		}
+
+		private void OnComplete(operations.UserGet operation, HttpResponse response)
+		{
+			this.operation = operation;
+			Action<operations.UserGet, HttpResponse> LocalCallback = Callback;
+			OnCompletion(operation, response, BenChristensonApiMonitor.Instance);    // this will free up the behavior to accept another call
+			count -= 1;
+			LocalCallback(operation, response);   // this is the project's custom OnComplete
+			if (DestroyOnComplete){
+				this.Destroy();
+			}
+		}
+
+		public void Spawn(Action<operations.UserGet, HttpResponse> Callback)
+		{ // this will spawn a thread to handle the rest call and return immediately
+			count += 1;
+			this.Callback = Callback;
+			
+
+ 			StartCoroutine(this.ExecuteAndWait());
+
+			/*
+			if (hg.ApiWebKit.Configuration.GetSetting<bool?>("Wait_Before_Returning") == true){
+                while(!this._completed){
+			        new WaitForSeconds(1);
+			    }
+			}*/
+		}
+
+		public models.User Run()
+		{ // this will block until complete
+			count += 1;
+			
+			ExecutableCode();
+			return responseData;
+		}
+
+		public override void ExecutableCode()
+		{
+			new operations.UserGet().SetParameters().Send(OnSuccess, OnFail, OnComplete);
+		}
+
+        public void Destroy()
+        {
+            if (count == 0) {
+                Destroy(this);
+            }
+        }
+	}
+
+	
 	public class UserPost: ApiBehavior<UserPost>
 	{
 		public operations.UserPost operation;

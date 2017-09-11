@@ -10,6 +10,7 @@ class Transfer(db.Model, ApiModel):
     user_id = db.Column(db.Integer, db.ForeignKey('account.account_id'))
     deposit_account_id = db.Column(db.Integer, db.ForeignKey('account.account_id'))
     withdraw_account_id = db.Column(db.Integer, db.ForeignKey('account.account_id'))
+    receipt = db.Column(db.String, default="")
     amount = db.Column(db.Float)
     created_timestamp = db.Column(db.DateTime(timezone=True), default=cst_now)
 
@@ -22,21 +23,34 @@ class Transfer(db.Model, ApiModel):
     @classmethod
     def keys(cls):
         return ['user_id', 'deposit_account_id', 'deposit_account_name', 'withdraw_account_id', 'withdraw_account_name',
-                'amount', 'created_timestamp']
+                'amount', 'created_timestamp', 'receipt']
 
     @property
     def deposit_account_name(self):
         """
         :return: str of the name of the account
         """
-        return self.deposit_account.name
+        if self.deposit_account is None:
+            return ""
+        else:
+            return self.deposit_account.name
 
     @property
     def withdraw_account_name(self):
         """
         :return: str of the name of the account
         """
-        return self.withdraw_account.name
+        if self.withdraw_account is None:
+            return ""
+        else:
+            return self.withdraw_account.name
+
+    def check_receipt(self, receipt):
+        pass  # todo implement some receipt validation so users can't arbitrarily increase there account holdings
+        return True
+
+    def generate_receipt(self):
+        self.receipt = "unclaimed"  # todo implement some receipt validation scheme
 
     def validate_amount(self, amount, **kwargs):
         """ This will validate amount is positive and less than 1000000 """

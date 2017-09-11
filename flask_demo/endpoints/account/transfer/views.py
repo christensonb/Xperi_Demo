@@ -92,3 +92,81 @@ def create(withdraw_acount_id, deposit_account_id, amount):
     transfer.deposit_account = deposit_account
     transfer.withdraw_account = withdraw_account
     return transfer
+
+
+@TRANSFER.route('/account/transfer/withdraw', methods=['PUT'])
+@api_endpoint(auth='User', validator=Transfer, add=True, commit=True)
+def create_withdraw(withdraw_acount_id, amount):
+    """
+    :param withdraw_acount_id: int of the account_id to withdraw the money from
+    :param amount:             float of the amount to transfer
+    :return:                   Transfer dict
+    """
+    query = Account.query.filter(account_id=withdraw_acount_id)
+    query = query.join(Access).filter_by(Access.user_id == current_user.user_id)
+    withdraw_account = query.first()
+    if withdraw_account is None:
+        raise UnauthorizedException("Current User does not have access to the account")
+
+    if withdraw_account.funds < amount:
+        raise PaymentRequiredException("Insufficent funds to do the transfer")
+
+    if not withdraw_account.is_active:
+        raise UnauthorizedException("The withdraw account is not active")
+
+    withdraw_account.funds -= amount
+
+    transfer = Transfer(user_id=current_user.user_id, amount=amount)
+    transfer.withdraw_account = withdraw_account
+    transfer.generate_receipt()
+    return transfer
+
+
+@TRANSFER.route('/account/transfer/deposit', methods=['PUT'])
+@api_endpoint(auth='User', validator=Transfer, add=True, commit=True)
+def create_deposit(deposit_account_id, amount, deposit_receipt):
+    """
+    :param deposit_account_id: int of the account_id to deposit the moeny to
+    :param amount:             float of the amount to transfer
+    :param deposit_receipt:    str of the validated receipt that money has been received
+    :return:                   Transfer dict
+    """
+    deposit_account = Account.query.filter(account_id=deposit_account_id)
+
+    if deposit_account is None:
+        raise NotFoundException("Failed to find deposit account")
+
+    if not deposit_account.is_active:
+        raise BadRequestException("The deposit account is not active")
+
+    transfer = Transfer(user_id=current_user.user_id, amount=amount)
+    if not transfer.check_receipt(deposit_receipt):
+        raise UnauthorizedException("Deposit Receipt is invalid")
+
+    deposit_account.funds += amount
+    transfer.deposit_account = deposit_account
+    return transfer
+
+
+@TRANSFER.route('/account/transfer/claim', methods=['PUT'])
+@api_endpoint(auth='Admin', validator=Transfer, add=True, commit=True)
+def claim(transfer_id, amount, created_timestamp, receipt):
+    """
+    :param transfer_id:        int of the account_id to deposit the moeny to
+    :param amount:             float of the amount to transfer
+    :param created_timestamp:  str of the validated receipt that money has been received
+    :param receipt:            str of the receipt
+    :return:                   Transfer dict
+    """
+    transfer = Transfer.query.filter(transfer_id).first()
+    if transfer is None:
+        raise NotFoundException("Failed to find transfer: %s" % transfer_id)
+
+    if transfer.amount != amount or transfer.created_timestamp != created_timestamp:
+        raise BadRequestException("Transfer parameters did not match amount or timestamp")
+
+    if transfer.receipt != receipt:
+        raise UnauthorizedException("Transfer receipt did not match")
+
+    transfer.receipt = ""
+    return transfer

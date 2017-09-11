@@ -26,7 +26,8 @@ namespace demo.BenChristenson.behaviors
 		public bool DestroyOnComplete = false;
 	    private Action<operations.AccountArrayGet, HttpResponse>  Callback;
 
-	    
+	    public int? offset;                     // int of the offset to use
+        public int? limit;                      // int of max number of puzzles to return
 
 		public List<models.Account> responseData; // list of Account dict the current user has access to
 
@@ -54,11 +55,12 @@ namespace demo.BenChristenson.behaviors
 			}
 		}
 
-		public void Spawn(Action<operations.AccountArrayGet, HttpResponse> Callback)
+		public void Spawn(int? offset, int? limit, Action<operations.AccountArrayGet, HttpResponse> Callback)
 		{ // this will spawn a thread to handle the rest call and return immediately
 			count += 1;
 			this.Callback = Callback;
-			
+			this.offset = offset;
+            this.limit = limit;
 
  			StartCoroutine(this.ExecuteAndWait());
 
@@ -70,17 +72,18 @@ namespace demo.BenChristenson.behaviors
 			}*/
 		}
 
-		public List<models.Account> Run()
+		public List<models.Account> Run(int? offset, int? limit)
 		{ // this will block until complete
 			count += 1;
-			
+			this.offset = offset;
+            this.limit = limit;
 			ExecutableCode();
 			return responseData;
 		}
 
 		public override void ExecutableCode()
 		{
-			new operations.AccountArrayGet().SetParameters().Send(OnSuccess, OnFail, OnComplete);
+			new operations.AccountArrayGet().SetParameters(offset, limit).Send(OnSuccess, OnFail, OnComplete);
 		}
 
         public void Destroy()

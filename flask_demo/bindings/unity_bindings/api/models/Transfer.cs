@@ -21,6 +21,7 @@ namespace demo.BenChristenson.models
         public string withdraw_account_name;
         public float amount;
         public string created_timestamp;
+        public string receipt;
 
         public override string ToString()
         {
@@ -43,6 +44,7 @@ namespace demo.BenChristenson.models
             ret.withdraw_account_name = crypto.GetString();
             ret.amount = crypto.GetFloat();
             ret.created_timestamp = crypto.GetString();
+            ret.receipt = crypto.GetString();
             return ret;
         }
 
@@ -56,6 +58,7 @@ namespace demo.BenChristenson.models
             crypto.AddString(withdraw_account_name,"withdraw_account_name");
             crypto.AddFloat(amount,"amount");
             crypto.AddString(created_timestamp,"created_timestamp");
+            crypto.AddString(receipt,"receipt");
             return crypto.ToString();
         }
 

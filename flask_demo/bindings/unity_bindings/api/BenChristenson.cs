@@ -15,7 +15,9 @@ namespace demo.BenChristenson
 {
 	public class  BenChristenson : MonoBehaviour
 	{
-	    public behaviors.AccountTransferArrayGet accountTransferArrayGet;
+	    public behaviors.AccountTransferWithdrawPut accountTransferWithdrawPut;
+        public behaviors.AccountTransferDepositPut accountTransferDepositPut;
+        public behaviors.AccountTransferArrayGet accountTransferArrayGet;
         public behaviors.AccountTransferGet accountTransferGet;
         public behaviors.AccountTransferPut accountTransferPut;
         public behaviors.AccountAccessArrayGet accountAccessArrayGet;
@@ -38,7 +40,9 @@ namespace demo.BenChristenson
             BenChristensonApiInitialize benChristensonApiInitialize = GetComponent<BenChristensonApiInitialize>();
             if (benChristensonApiInitialize.is_behaviors_created_at_startup())
             {
-			    accountTransferArrayGet = gameObject.AddComponent<behaviors.AccountTransferArrayGet>();
+			    accountTransferWithdrawPut = gameObject.AddComponent<behaviors.AccountTransferWithdrawPut>();
+                accountTransferDepositPut = gameObject.AddComponent<behaviors.AccountTransferDepositPut>();
+                accountTransferArrayGet = gameObject.AddComponent<behaviors.AccountTransferArrayGet>();
                 accountTransferGet = gameObject.AddComponent<behaviors.AccountTransferGet>();
                 accountTransferPut = gameObject.AddComponent<behaviors.AccountTransferPut>();
                 accountAccessArrayGet = gameObject.AddComponent<behaviors.AccountAccessArrayGet>();

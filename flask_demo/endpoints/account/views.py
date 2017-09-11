@@ -20,11 +20,23 @@ def get(account_id):
 
 @ACCOUNT.route('/account/array', methods=['GET'])
 @api_endpoint(auth='User')
-def get_array():
+def get_array(limit=None, offset=None):
     """
-    :return: list of Account dict the current user has access to
+    :param offset: int of the offset to use
+    :param limit:  int of max number of puzzles to return
+    :return:       list of Account dict the current user has access to
     """
-    accounts = Account.query.join("Access").filter(user_id=current_user.user_id).all()
+    query = Account.query.join("Access").filter(user_id=current_user.user_id)
+    if offset is not None and offset < 0:
+        offset += query.count()
+
+    if offset:
+        query = query.offset(offset)
+
+    if limit:
+        query = query.limit(limit)
+
+    accounts = query.all()
     return accounts
 
 

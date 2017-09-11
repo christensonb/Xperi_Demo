@@ -23,14 +23,16 @@ namespace demo.BenChristenson.operations
 	[HttpPath("BenChristenson","account/array")]
 	public class AccountArrayGet: HttpOperation
 	{
-	    
+	    [HttpQueryString] public int? offset;                     // int of the offset to use
+        [HttpQueryString] public int? limit;                      // int of max number of puzzles to return
 
 		[HttpResponseJsonBody]
 		public List<models.Account> responseData; // list of Account dict the current user has access to
 
-		public AccountArrayGet SetParameters()
+		public AccountArrayGet SetParameters(int? offset, int? limit)
 		{
-		    
+		    this.offset = offset;
+            this.limit = limit;
 			return this;
 		}
 

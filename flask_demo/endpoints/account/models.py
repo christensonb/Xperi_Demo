@@ -20,7 +20,7 @@ class Account(db.Model, ApiModel):
     status = db.Column(db.Enum(*ACCOUNT_STATUS_ENUM, name='account_status'), default=ACCOUNT_STATUS_ENUM[0])
     created_timestamp = db.Column(db.DateTime(timezone=True), default=cst_now)
 
-    # users = association_proxy('account_access', 'user')
+    users = association_proxy('account_access', 'user')
 
     @classmethod
     def keys(cls):

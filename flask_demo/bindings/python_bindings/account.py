@@ -5,11 +5,13 @@ from seaborn.rest.intellisense import *
 
 class Account_Array(Endpoint):
 
-    def get(self):
+    def get(self, limit=None, offset=None):
         """
-        :return: list of Account dict the current user has access to
+        :param offset: int of the offset to use
+        :param limit:  int of max number of puzzles to return
+        :return:       list of Account dict the current user has access to
         """
-        return self.connection.get('account/array')
+        return self.connection.get('account/array', limit=limit, offset=offset)
 
 
 class Account(Endpoint):

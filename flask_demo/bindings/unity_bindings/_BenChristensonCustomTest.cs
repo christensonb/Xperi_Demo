@@ -45,6 +45,85 @@ namespace demo.BenChristenson.placeholder
 
         
 
+        public static void AccountTransferWithdrawPut(
+            int withdraw_acount_id,                 // int of the account_id to withdraw the money from
+            float amount)                           // float of the amount to transfer
+        {   
+            if (benChristenson.accountTransferWithdrawPut == null){
+                benChristenson.accountTransferWithdrawPut = m_instance.gameObject.AddComponent<behaviors.AccountTransferWithdrawPut>();
+                benChristenson.accountTransferWithdrawPut.DestroyOnComplete = benChristensonApiInitialize.is_behavior_destroyed_on_complete();
+            }
+
+            
+            if(m_logLevel>3)
+                Debug.Log(Prefix()+"AccountTransferWithdrawPut started");
+
+            benChristenson.accountTransferWithdrawPut.Spawn(withdraw_acount_id, amount, 
+                                       Callback: new Action<operations.AccountTransferWithdrawPut, HttpResponse> ((operation, response) =>
+            {
+                try
+                {
+                    if (response.HasError)
+                    {
+                        if(m_logLevel>1)
+                            Debug.LogError(Prefix()+"AccountTransferWithdrawPut failed " + response.Error);
+                    }
+                    else
+                    {
+                        models.Transfer responseData = operation.responseData;    // Transfer dict
+                        if(m_logLevel>2)
+                            Debug.Log(Prefix()+"AccountTransferWithdrawPut completed Successfully with " + responseData.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if(m_logLevel>0)
+                        Debug.LogError(Prefix()+"AccountTransferWithdrawPut failed in response with: "+ex.ToString());
+                }
+            }));
+        }
+        
+
+        public static void AccountTransferDepositPut(
+            int deposit_account_id,                 // int of the account_id to deposit the moeny to
+            float amount,                           // float of the amount to transfer
+            string deposit_receipt)                 // str of the validated receipt that money has been received
+        {   
+            if (benChristenson.accountTransferDepositPut == null){
+                benChristenson.accountTransferDepositPut = m_instance.gameObject.AddComponent<behaviors.AccountTransferDepositPut>();
+                benChristenson.accountTransferDepositPut.DestroyOnComplete = benChristensonApiInitialize.is_behavior_destroyed_on_complete();
+            }
+
+            
+            if(m_logLevel>3)
+                Debug.Log(Prefix()+"AccountTransferDepositPut started");
+
+            benChristenson.accountTransferDepositPut.Spawn(deposit_account_id, amount, deposit_receipt, 
+                                       Callback: new Action<operations.AccountTransferDepositPut, HttpResponse> ((operation, response) =>
+            {
+                try
+                {
+                    if (response.HasError)
+                    {
+                        if(m_logLevel>1)
+                            Debug.LogError(Prefix()+"AccountTransferDepositPut failed " + response.Error);
+                    }
+                    else
+                    {
+                        models.Transfer responseData = operation.responseData;    // Transfer dict
+                        if(m_logLevel>2)
+                            Debug.Log(Prefix()+"AccountTransferDepositPut completed Successfully with " + responseData.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if(m_logLevel>0)
+                        Debug.LogError(Prefix()+"AccountTransferDepositPut failed in response with: "+ex.ToString());
+                }
+            }));
+        }
+        
+
         public static void AccountTransferArrayGet(
             int account_id,                         // int of the account_id to get transfer for
             bool? withdraws_only = null,            // bool if true only gets withdraw transfer if false only gets deposit, default gets both
@@ -286,7 +365,9 @@ namespace demo.BenChristenson.placeholder
         }
         
 
-        public static void AccountArrayGet()
+        public static void AccountArrayGet(
+            int? offset = null,                     // int of the offset to use
+            int? limit = null)                      // int of max number of puzzles to return
         {   
             if (benChristenson.accountArrayGet == null){
                 benChristenson.accountArrayGet = m_instance.gameObject.AddComponent<behaviors.AccountArrayGet>();
@@ -297,7 +378,7 @@ namespace demo.BenChristenson.placeholder
             if(m_logLevel>3)
                 Debug.Log(Prefix()+"AccountArrayGet started");
 
-            benChristenson.accountArrayGet.Spawn(
+            benChristenson.accountArrayGet.Spawn(offset, limit, 
                                        Callback: new Action<operations.AccountArrayGet, HttpResponse> ((operation, response) =>
             {
                 try

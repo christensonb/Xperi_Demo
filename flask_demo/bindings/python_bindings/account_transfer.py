@@ -1,6 +1,32 @@
 from seaborn.rest.intellisense import *
 
 
+class Account_Transfer_Withdraw(Endpoint):
+
+    def put(self, withdraw_acount_id, amount):
+        """
+        :param withdraw_acount_id: int of the account_id to withdraw the money from
+        :param amount:             float of the amount to transfer
+        :return:                   Transfer dict
+        """
+        return self.connection.put('account/transfer/withdraw', data=dict(withdraw_acount_id=withdraw_acount_id,           amount=amount))
+
+
+class Account_Transfer_Deposit(Endpoint):
+
+    def put(self, deposit_account_id, amount, deposit_receipt):
+        """
+        :param deposit_account_id: int of the account_id to deposit the moeny to
+        :param amount:             float of the amount to transfer
+        :param deposit_receipt:    str of the validated receipt that money has been received
+        :return:                   Transfer dict
+        """
+        return self.connection.put('account/transfer/deposit',
+                                   data=dict(deposit_account_id=deposit_account_id,
+                                             amount=amount,
+                                             deposit_receipt=deposit_receipt))
+
+
 class Account_Transfer_Array(Endpoint):
 
     def get(self, account_id, withdraws_only=None, limit=None, offset=None):
@@ -18,8 +44,28 @@ class Account_Transfer_Array(Endpoint):
                                    offset=offset)
 
 
+class Account_Transfer_Claim(Endpoint):
+
+    def put(self, transfer_id, amount, created_timestamp, receipt):
+        """
+        :param transfer_id:        int of the account_id to deposit the moeny to
+        :param amount:             float of the amount to transfer
+        :param created_timestamp:  str of the validated receipt that money has been received
+        :param receipt:            str of the receipt
+        :return:                   Transfer dict
+        """
+        return self.connection.put('account/transfer/claim',
+                                   data=dict(transfer_id=transfer_id,
+                                             amount=amount,
+                                             created_timestamp=created_timestamp,
+                                             receipt=receipt))
+
+
 class Account_Transfer(Endpoint):
     array = Account_Transfer_Array()
+    claim = Account_Transfer_Claim()
+    deposit = Account_Transfer_Deposit()
+    withdraw = Account_Transfer_Withdraw()
 
     def get(self, transfer_id):
         """

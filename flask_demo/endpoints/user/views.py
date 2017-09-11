@@ -89,6 +89,18 @@ def delete(user_id=None):
     return user
 
 
+@USER.route('/user/username', methods=['DELETE'])
+@api_endpoint(auth='Admin', validator=User, delete=True)
+def username_delete(username):
+    """
+        This will delete a user from the Database
+    :param username: str of the username give my the player
+    :return:         User dict of the user created
+    """
+    user = User.query.filter_by(username=username).first()
+    return user
+
+
 @USER.route('/user/signup', methods=['PUT'])
 @api_endpoint(auth='Anonymous', validator=User, html='user/signup.html', redirect='/')
 def create(username, password, email=None, full_name=None):

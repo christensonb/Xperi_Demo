@@ -13,6 +13,17 @@ class User_Login_Email(Endpoint):
         return self.connection.post('user/login/email', data=dict(email=email,           password=password))
 
 
+class User_Username(Endpoint):
+
+    def delete(self, username):
+        """
+            This will delete a user from the Database
+        :param username: str of the username give my the player
+        :return:         User dict of the user created
+        """
+        return self.connection.delete('user/username', username=username)
+
+
 class User_Logout(Endpoint):
 
     def post(self):
@@ -154,6 +165,7 @@ class User(Endpoint):
     login = User_Login()
     logout = User_Logout()
     signup = User_Signup()
+    username = User_Username()
 
     def get(self):
         """

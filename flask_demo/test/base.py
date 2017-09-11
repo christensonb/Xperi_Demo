@@ -1,16 +1,19 @@
 """ This defines a Base Test
 """
-
 import os
 import sys
-import thread
+if sys.version_info[0] == 3:
+    import _thread as thread
+else:
+    import thread
+
 flask_folder = os.path.abspath(__file__).replace('\\','/').rsplit('/test',1)[0]
 sys.path.append(flask_folder)
 
 from settings.config import configuration
 from bindings.python_bindings import Connection
 
-from seaborn.file import relative_path, find_file
+from seaborn.file import find_file
 from seaborn.test.standard_import import *
 from test_chain import TestChain
 

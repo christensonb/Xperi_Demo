@@ -9,21 +9,7 @@ from test.base import *
 
 class UserTest(BaseTest):
     def test_user_signup(self, username="Ben", password=None, email=None, delete_if_exists=True):
-        password = password or self.local_data.user_password
-
-        if delete_if_exists:
-            try:
-                old = self.conn.user.get(username=username)
-                self.conn.user.delete(old['user_id'])
-            except Exception as e:
-                pass
-
-        user_conn = Connection(username, password, base_uri=self.SERVER, timeout=self.TIMEOUT)
-        ret = user_conn.user.signup.put(username=username, password=password, email=email)
-
-        user_conn.user_id = ret['user_id']
-        user_conn._status = "logged in from signup"
-        return user_conn
+        self.user_signup(username, password, email, delete_if_exists=True)
 
     def test_user_update_email(self, email=None):
         email = email or 'update@%s' % '.'.join(self.configuration.domain.split('.')[-2:])

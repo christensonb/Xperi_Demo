@@ -5,7 +5,7 @@ import re
 from werkzeug.security import check_password_hash
 
 EMAIL_REGEX = re.compile(r'^.+@([^.@][^@]+)$')
-GENERIC_REGEX = re.compile(r'^[A-Za-z0-9_]{2,30}$')
+GENERIC_REGEX = re.compile(r'^[A-Za-z0-9_-]{2,30}$')
 
 AUTH_LEVELS_ENUM = ['User',  # someone who has is a basic user
                     'Demo',  # someone who has signed up to be a demo user
@@ -74,6 +74,7 @@ class User(db.Model, ApiModel):
     @classmethod
     def validator_username(cls, username, **kwargs):
         """ This will determine if the name is valid """
+        match = GENERIC_REGEX.match(username)
         assert GENERIC_REGEX.match(username), 'Invalid Username Syntax: %s' % username
 
     @classmethod

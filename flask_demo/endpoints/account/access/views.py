@@ -15,7 +15,7 @@ def create(account_id, user_id):
     :param user_id:    int of the user_id to grant access
     :return:           Access dict
     """
-    account = Account.query.filter(account_id=account_id, user_id=current_user.user_id).first()
+    account = Account.query.filter_by(account_id=account_id, user_id=current_user.user_id).first()
     if account is None:
         raise NotFoundException("Account not found, or current user is not the primary on the account")
 
@@ -42,11 +42,11 @@ def delete(account_id, user_id):
 
 
 @ACCESS.route('/account/access/array', methods=['GET'])
-@api_endpoint(auth='User', add=True, commit=True)
+@api_endpoint(auth='User')
 def get(account_id):
     """ This will return all users who have access to the account, only the primary can do this command
     :param account_id: int of the account_id for the account
     :return:           list of User dict
     """
     account = Account.get(account_id)
-    return account.users
+    return list(account.users)

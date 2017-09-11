@@ -44,7 +44,7 @@ def login(username, password, email=None):
 
     for existing_user in existing_users:
         if existing_user.check_password(password):
-            if existing_user.status != 'active':
+            if existing_user.status != 'Active':
                 raise ForbiddenException("This account is not active")
 
             login_user(existing_user, remember=True)

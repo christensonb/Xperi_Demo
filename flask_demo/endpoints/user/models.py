@@ -49,6 +49,10 @@ class User(db.Model, ApiModel):
     def is_anonymous(self):
         return False
 
+    @property
+    def is_active(self):
+        return self.status == 'Active'
+
     def is_auth_level(self, auth_level):
         """
         :param auth_level:  str of level to test for

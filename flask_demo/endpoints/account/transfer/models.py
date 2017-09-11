@@ -13,8 +13,11 @@ class Transfer(db.Model, ApiModel):
     amount = db.Column(db.Float)
     created_timestamp = db.Column(db.DateTime(timezone=True), default=cst_now)
 
-    deposit_account = db.relationship(Account, backref=backref('account_deposits', lazy='dynamic', uselist=True))
-    withdraw_account = db.relationship(Account, backref=backref('account_withdraws', lazy='dynamic', uselist=True))
+    deposit_account = db.relationship(Account, foreign_keys='Transfer.deposit_account_id',
+                                      backref=backref('account_deposits', lazy='dynamic', uselist=True))
+
+    withdraw_account = db.relationship(Account, foreign_keys='Transfer.withdraw_account_id',
+                                       backref=backref('account_withdraws', lazy='dynamic', uselist=True))
 
     @classmethod
     def keys(cls):

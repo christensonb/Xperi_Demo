@@ -27,9 +27,6 @@ class User(db.Model, ApiModel):
     auth_level = db.Column(db.Enum(*AUTH_LEVELS_ENUM, name='user_auth_level'), default=AUTH_LEVELS_ENUM[0])
     created_timestamp = db.Column(db.DateTime(timezone=True), default=cst_now)
 
-    # accounts = association_proxy('account_access', 'account')
-
-
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
 

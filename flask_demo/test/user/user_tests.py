@@ -1,6 +1,3 @@
-__author__ = "Ben Christenson"
-__date__ = "9/11/17"
-
 import os
 import sys
 

@@ -1,12 +1,9 @@
 """ This defines a Base Test
 """
 
-
-__author__ = "Ben Christenson"
-__date__ = "9/11/17"
-
 import os
 import sys
+import thread
 flask_folder = os.path.abspath(__file__).replace('\\','/').rsplit('/test',1)[0]
 sys.path.append(flask_folder)
 
@@ -20,14 +17,14 @@ from test_chain import TestChain
 PROXY_DEBUG_SERVER = 'http://127.0.0.1:4777'
 PROXY_AWS_SERVER = 'http://127.0.0.1:4888'
 DEBUG_SERVER = 'http://127.0.0.1:4999'
-AWS_SERVER = 'http://%s'
-AWS_SERVER_SSL = 'https://api.puzzlesandpotions.com'
+AWS_SERVER = 'http://%s'%configuration.domain
+AWS_SERVER_SSL = 'https://%s'%configuration.domain
 
 
 class BaseTest(TestChain):
     thread = None
     SERVER = DEBUG_SERVER
-    TIMEOUT = 200
+    TIMEOUT = 10
     START_TIME = time.time()
     local_data = LocalData(find_file('_test.json'), no_question=True)
     configuration = configuration
@@ -37,40 +34,21 @@ class BaseTest(TestChain):
         traceback_skip_path('/bindings/')
         print("Connecting to Server: %s"%cls.SERVER)
         admin_password = cls.local_data.admin_password
-        cls.conn = Connection('Admin-User', admin_password, 'user/login', base_uri=cls.SERVER)
         cls.anonymous = Connection("Anonymous", base_uri=cls.SERVER)
-
         if cls.SERVER is DEBUG_SERVER or cls.SERVER is PROXY_DEBUG_SERVER:
-            try:
-                 cls.conn.echo.get()
-                 print("Server is Already Started")
-            except:
-                if sys.version_info[0] == 2:
-                    cls._spawn_gevent_flask()
-                else:
-                    cls._spawn_thread_flask()
+            cls.start_server()
+        cls.conn = Connection('Admin-User', admin_password, 'user/login', base_uri=cls.SERVER)
 
     @classmethod
-    def _get_flask_run(cls):
-        from settings.global_import import setup_flask
-        return setup_flask()
-
-    @classmethod
-    def _spawn_gevent_flask(cls):
-        import gevent
-        run = cls._get_flask_run()
-        sigquit = getattr(signal, 'SIGQUIT', "Windows_Problem")
-        if sigquit != "Windows_Problem":
-            gevent.signal(sigquit, gevent.kill)
-        cls.thread = gevent.spawn(run)
-        cls.thread.start()
-        gevent.sleep(0)
-
-    @classmethod
-    def _spawn_thread_flask(cls):
-        import thread
-        run = cls._get_flask_run()
-        thread.start_new_thread(run,())
+    def start_server(cls):
+        try:
+             cls.anonymous.echo.get()
+             print("Server is Already Started")
+        except:
+            from settings.global_import import setup_flask
+            import endpoints
+            run = setup_flask.setup_run(endpoints)
+            thread.start_new_thread(run,())
 
     @classmethod
     def tearDownClass(cls):

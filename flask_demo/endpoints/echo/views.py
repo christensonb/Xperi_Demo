@@ -5,8 +5,6 @@ from settings.global_import import *
 from seaborn.timestamp import datetime_to_str
 log.trace("Importing endpoint echo.views")
 from .models import Echo
-__author__ = 'Ben Christenson'
-__date__ = "9/15/15"
 
 
 ECHO = Blueprint('test', __name__)

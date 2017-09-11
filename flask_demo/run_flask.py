@@ -1,6 +1,4 @@
 """ This is to start the flask server when debugging """
-__author__ = 'Ben Christenson'
-__date__ = "9/11/17"
 import os
 import sys
 import traceback

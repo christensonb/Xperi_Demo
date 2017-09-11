@@ -1,5 +1,3 @@
-__author__ = 'Ben Christenson'
-__date__ = "9/24/15"
 from settings.global_import import *
 
 log.trace("Importing endpoint user.models")

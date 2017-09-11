@@ -1,6 +1,3 @@
-__author__ = 'Ben Christenson'
-__date__ = "9/11/17"
-
 from seaborn.logger import log
 
 log.trace("importing flask modules")

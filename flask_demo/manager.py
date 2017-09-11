@@ -1,9 +1,6 @@
 """ This will accept command prompt commands to do events like init db, drop db, create_endpoints.
     It will run the service but isn't the only way to run the service
 """
-
-__author__ = 'Ben Christenson'
-__date__ = "9/11/17"
 import sys
 from run_flask import setup_flask
 from seaborn.flask.setup.manager import setup_manager

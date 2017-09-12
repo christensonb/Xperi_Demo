@@ -8,7 +8,6 @@
 
     Example:
         python cli.py -i test\mock_cli_input.txt -o test\mock_cli_input.txt
-
 """
 import os
 from six.moves import input
@@ -18,7 +17,7 @@ from flask_app.settings.global_import import setup_flask
 from flask_app import endpoints
 from logging import log
 from seaborn.logger import setup_log_level
-import time
+
 setup_log_level("ERROR")
 
 
@@ -41,7 +40,7 @@ class CommandLineInterpretorDemo(object):
             else:
                 args = args[1:]
 
-        self.store_input = store_file and open(store_file,'w') or None
+        self.store_input = store_file and open(store_file, 'w') or None
 
         self.anoymous = None
         self.conn = None
@@ -50,16 +49,23 @@ class CommandLineInterpretorDemo(object):
         if len(self.mock_input) > 0 and self.mock_input[0] != '' and \
                         self.mock_input[0] != "What do you want to do: 0":
             print(self.mock_input[0])
-            answer = self.mock_input.pop(0).split(':', 1)[1]
-            time.sleep(2)
+            answer = self.mock_input.pop(0).split(':', 1)[1].strip()
+            answer2 = input('   enter for auto-answer or override with custom answer: ')
+            if answer2:
+                answer = answer2
+                self.mock_input.clear()
         else:
             answer = input(question)
         if self.store_input != None:
             self.store_input.write('%s%s\n' % (question, answer))
+
+        if answer.isdigit():
+            answer = eval(answer)
         return answer
 
     def clear(self):
-        os.system('clear')
+        pass
+        # os.system('clear')
 
     def print_options(self, options, message, padding=5):
         """ This will print the menu options and return the users choice
@@ -72,8 +78,6 @@ class CommandLineInterpretorDemo(object):
             print("%s : %s" % (str(i).rjust(3), option))
         print('')
         ret = self.input(message + ': ')
-        if ret.isdigit():
-            return eval(ret)
         return ret
 
     def print_table(self, title, data, clear=True, padding=5):
@@ -88,7 +92,7 @@ class CommandLineInterpretorDemo(object):
             data = [data]
         if clear:
             self.clear()
-        print(title+'\n')
+        print(title + '\n')
         print(SeabornTable(data).obj_to_mark_down(True))
         print('\n' * padding)
 
@@ -120,7 +124,7 @@ class CommandLineInterpretorDemo(object):
     def run(self):
         """ This is the main loop of the program that executes the user's menu choices """
         self.setup_server()
-        options = ["Quit", "Login as User", "Create User", "List All Users","Get Current User",
+        options = ["Quit", "Login as User", "Create User", "List All Users", "Get Current User",
                    "Create Account", "List All Accounts", "List User Accounts",
                    "Create Access", "List Account Access",
                    "Create Transfer", "List All Transfers", "List Account Transfers"]

@@ -2,8 +2,8 @@
     It will run the service but isn't the only way to run the service
 """
 import sys
-from run_flask import setup_flask
 from seaborn.flask.setup.manager import setup_manager
+from flask_app.run_flask import setup_flask
 
 
 def main():

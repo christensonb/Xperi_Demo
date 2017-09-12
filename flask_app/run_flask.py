@@ -3,19 +3,19 @@ import os
 import sys
 import traceback
 
-sys.path.append(os.path.split(os.path.abspath(__file__)[0]))
+current_path = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(current_path))
 from seaborn.logger import log
 
 try:
-    import settings.global_import
-    from settings.global_import import setup_flask
+    from flask_app.settings.global_import import setup_flask
 except Exception as ex:
     log.error("Exception in importing global_import with %s\n\n%s" % (ex, traceback.format_exc()))
     print("Exception in importing global_import with %s\n\n%s" % (ex, traceback.format_exc()))
     sys.exit()
 
 try:
-    import endpoints
+    from flask_app import endpoints
 except Exception as ex:
     log.error("Exception in importing endpoints with %s\n\n%s" % (ex, traceback.format_exc()))
     print("Exception in importing endpoints with %s\n\n%s" % (ex, traceback.format_exc()))

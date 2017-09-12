@@ -1,10 +1,10 @@
 import os
 import sys
 
-flask_folder = os.path.abspath(__file__).replace('\\', '/').rsplit('/xperi_demo', 1)[0]
+flask_folder = os.path.abspath(__file__).replace('\\', '/').rsplit('/flask_app', 1)[0]
 sys.path.append(flask_folder)
-from xperi_demo.test.base import *
-from xperi_demo.test.account.account_tests import AccountTest
+from flask_app.test.base import *
+from flask_app.test.account.account_tests import AccountTest
 
 
 class TransferTest(AccountTest):

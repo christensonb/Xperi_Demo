@@ -8,11 +8,11 @@ if sys.version_info[0] == 3:
 else:
     import thread
 
-flask_folder = os.path.abspath(__file__).replace('\\', '/').rsplit('/xperi_demo', 1)[0]
+flask_folder = os.path.abspath(__file__).replace('\\', '/').rsplit('/flask_app', 1)[0]
 sys.path.append(flask_folder)
 
-from xperi_demo.settings.config import configuration
-from xperi_demo.bindings.python_bindings import Connection
+from flask_app.settings.config import configuration
+from flask_app.bindings.python_bindings import Connection
 
 from seaborn.file import find_file
 from seaborn.test.standard_import import *
@@ -49,8 +49,8 @@ class BaseTest(TestChain):
             cls.anonymous.echo.get()
             print("Server is Already Started")
         except:
-            from settings.global_import import setup_flask
-            import endpoints
+            from flask_app.settings.global_import import setup_flask
+            from flask_app import endpoints
             run = setup_flask.setup_run(endpoints)
             thread.start_new_thread(run, ())
 

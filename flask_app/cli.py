@@ -13,9 +13,9 @@
 import os
 from six.moves import input
 from seaborn.table import SeabornTable
-from test.base import *
-from settings.global_import import setup_flask
-import endpoints
+from flask_app.test.base import *
+from flask_app.settings.global_import import setup_flask
+from flask_app import endpoints
 from logging import log
 from seaborn.logger import setup_log_level
 

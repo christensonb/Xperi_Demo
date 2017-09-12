@@ -1,9 +1,9 @@
-from settings.global_import import *
+from flask_app.settings.global_import import *
 
 log.trace("Importing endpoint user.views")
 
 from werkzeug.security import generate_password_hash
-from endpoints.user.models import User
+from flask_app.endpoints.user.models import User
 
 USER = Blueprint('user', __name__)
 

@@ -2,38 +2,66 @@
     This is a Command Line Interpreter to act as an interface to teh flask demo.
 
     Simply run the script with python and choose from the list of options.
+
+    The user inputs can be saved to a file using -o filename at command line
+    The user inputs can be mocked from a file using -i filename at command line
 """
 import os
-import platform
 from six.moves import input
 from seaborn.table import SeabornTable
 from test.base import *
+from settings.global_import import setup_flask
+import endpoints
+from logging import log
+from seaborn.logger import setup_log_level
+
+setup_log_level("ERROR")
 
 
 class CommandLineInterpretorDemo(object):
     SERVER = None
     local_data = LocalData(find_file('_test.json'), no_question=True)
 
-    def __init__(self):
+    def __init__(self, args):
+        self.mock_input = []
+        self.store_input = None
+
+        while len(args) >= 2:
+            if args[0] == '-i':
+                self.mock_input = open(args[1], 'r').read().split('\n')
+                args = args[2:]
+            elif args[0] == '-o':
+                self.store_input = open(args[1], 'w')
+                args = args[2:]
+            else:
+                args = args[1:]
         self.anoymous = None
         self.conn = None
 
-    def clear(self):
-        if 'Windows' in platform.platform:
-            os.popen('clear').read()
+    def input(self, question):
+        if len(self.mock_input) > 0:
+            print(self.mock_input[0])
+            answer = self.mock_input.pop(0).split(':', 1)
         else:
-            os.popen('cls').read()
+            answer = input(question)
+        if self.store_input != None:
+            self.store_input.write('%s%s\n' % (question, answer))
+        return answer
+
+    def clear(self):
+        os.system('clear')
 
     def print_options(self, options, message, padding=5):
         """ This will print the menu options and return the users choice
         :param options: list of string of options to be printed as a list with numbers
-        :param message: str of message to print with the input
-        :return: str or int of the users input
+        :param message: str of message to print with the self.input
+        :return: str or int of the users self.input
         """
         print("\n" * padding)
         for i, option in enumerate(options):
             print("%s: %s" % (str(i).ljust(3), option))
-        ret = input(message + ': ')
+        print('')
+        ret = self.input(message + ': ')
         if ret.isdigit():
             return eval(ret)
         return ret
@@ -50,8 +78,8 @@ class CommandLineInterpretorDemo(object):
             data = [data]
         if clear:
             self.clear()
-        print(title)
-        print(SeabornTable(data))
+        print(title+'\n')
+        print(SeabornTable(data).obj_to_mark_down(True))
         print('\n' * padding)
 
     def setup_server(self):
@@ -72,8 +100,6 @@ class CommandLineInterpretorDemo(object):
             print("Server was already up and running")
         except:
             print("Local Server being started automatically")
-            from settings.global_import import setup_flask
-            import endpoints
             run = setup_flask.setup_run(endpoints)
             thread.start_new_thread(run, ())
 
@@ -103,12 +129,12 @@ class CommandLineInterpretorDemo(object):
         sys.exit()
 
     def login_as_user(self):
-        user = self.conn.login(input('username: '), input('password: '), login_url='user/login')
+        user = self.conn.login(self.input('username: '), self.input('password: '), login_url='user/login')
         self.print_table("Login User", user)
 
     def create_user(self):
-        username = input('username: ')
-        password = input('password: ')
+        username = self.input('username: ')
+        password = self.input('password: ')
         self.conn = Connection(username, base_uri=self.SERVER)
         return self.conn.user.signup.post(username, password)
 
@@ -116,7 +142,7 @@ class CommandLineInterpretorDemo(object):
         return self.admin.user.array.get()
 
     def create_account(self):
-        return self.conn.account.put(input("name: "))
+        return self.conn.account.put(self.input("name: "))
 
     def list_all_accounts(self):
         return self.admin.account.admin.array.get()
@@ -127,18 +153,18 @@ class CommandLineInterpretorDemo(object):
     def create_access(self):
         accounts = self.conn.account.array.get(primary=True)
         self.print_table("Users accounts pick one", accounts)
-        return self.conn.account.access.put(input("account_id: "),
-                                            input("user_id: "))
+        return self.conn.account.access.put(self.input("account_id: "),
+                                            self.input("user_id: "))
 
-    def list_all_access(self):
-        return self.admin.account.access.get(input("account_id: "))
+    def list_account_access(self):
+        return self.admin.account.access.get(self.input("account_id: "))
 
     def create_transfer(self):
         accounts = self.admin.account.admin.array.get()
         self.print_table("UserID: %s" % self.conn.user_id, accounts)
-        withdraw_account_id = input("withdraw_account_id: ")
-        deposit_account_id = input("deposit_account_id: ")
-        amount = input("amount to transfer: ")
+        withdraw_account_id = self.input("withdraw_account_id: ")
+        deposit_account_id = self.input("deposit_account_id: ")
+        amount = self.input("amount to transfer: ")
         transfer = self.conn.transfer.put(withdraw_account_id or None, deposit_account_id or None, amount)
         self.print_table("Create Transfer", transfer)
 
@@ -158,4 +184,4 @@ class CommandLineInterpretorDemo(object):
 
 
 if __name__ == '__main__':
-    CommandLineInterpretorDemo().run()
+    CommandLineInterpretorDemo(sys.argv).run()

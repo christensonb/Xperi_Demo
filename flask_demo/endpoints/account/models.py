@@ -15,7 +15,7 @@ class Account(db.Model, ApiModel):
     __tablename__ = "account"
     account_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('usr.user_id'))
-    name = db.Column(db.String, default=datetime_to_str)
+    name = db.Column(db.String, default=datetime_to_str, unique=True)
     funds = db.Column(db.Float, default=0.0)
     status = db.Column(db.Enum(*ACCOUNT_STATUS_ENUM, name='account_status'), default=ACCOUNT_STATUS_ENUM[0])
     created_timestamp = db.Column(db.DateTime(timezone=True), default=cst_now)

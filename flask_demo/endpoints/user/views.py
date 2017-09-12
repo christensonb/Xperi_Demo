@@ -37,9 +37,9 @@ def login(username, password, email=None):
 
     if not existing_users:
         if username:
-            raise NotFoundException(username='Invalid User')
+            raise NotFoundException(username='Invalid Username: %s'%username)
         else:
-            raise NotFoundException(email='Invalid Email')
+            raise NotFoundException(email='Invalid Email: %s'%email)
 
     for existing_user in existing_users:
         if existing_user.check_password(password):

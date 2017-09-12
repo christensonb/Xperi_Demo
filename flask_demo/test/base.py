@@ -63,7 +63,7 @@ class BaseTest(TestChain):
                           timeout=self.TIMEOUT)
         return user
 
-    def user_signup(self, username="Ben", password=None, email=None, delete_if_exists=True):
+    def test_user_signup(self, username="Ben", password=None, email=None, delete_if_exists=True):
         password = password or self.local_data.user_password
 
         if delete_if_exists:

@@ -48,6 +48,18 @@ def create(name=None, user_ids=None):
     :param user_ids: list of int of users to give access to this account defaults to current user
     :return:         Account dict created
     """
-    account = Account(name=name or datetime_to_str(), user_id=current_user.user_id)
-    account.user_access = [Access(user_id=user_id) for user_id in (user_ids or [current_user.user_id])]
+    account =  Account.query.filter_by(name = name).first() if name is not None else None
+    user_ids = user_ids or [current_user.user_id]
+    if account is None:
+        account = Account(name=name or datetime_to_str(), user_id=current_user.user_id)
+        account.user_access = [Access(user_id=user_id) for user_id in user_ids]
+    else:
+        if account.user_id is not current_user.user_id:
+            raise UnauthorizedException('Account with the name "%s" already exists'%name)
+
+        for access in account.user_access:
+            if access.user_id in user_ids:
+                user_ids.remove(access.user_id)
+        for user_id in user_ids:
+            account.user_access.append(Access(user_id=user_id))
     return account

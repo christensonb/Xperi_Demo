@@ -10,11 +10,7 @@ from test.account.account_tests import AccountTest
 class AccessTest(AccountTest):
     def test_create_access(self, username="Demo-User", account_name="demo_account"):
         user, account = self.test_create_account(username, account_name)
-
-        try:
-            other_user = self.user_signup('Demo-User2')
-        except Exception as ex:
-            raise unittest.SkipTest('Exception in User Signup: %s' % ex)
+        other_user = self.test_user_signup('Demo-User2', delete_if_exists=False)
 
         try:
             other_user.account.access.put(account['account_id'], other_user.user_id)

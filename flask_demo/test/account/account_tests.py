@@ -9,11 +9,11 @@ from test.base import *
 
 class AccountTest(BaseTest):
     def test_create_account(self, username="Demo-User", account_name="demo_account"):
-        user = self.test_login(username)
+        user = self.test_user_signup(username, delete_if_exists=False)
         account = user.account.put(name=account_name)
         self.assertEqual(account_name, account['name'], 'Failed to set name')
         self.assertEqual(user.user_id, account['user_id'], 'Failed to set user_id')
-        self.assertEqual([user.user_id], account['user_ids'], 'Failed to set access users')
+        self.assertIn(user.user_id, account['user_ids'], 'Failed to set access users')
         return user, account
 
     def test_get_account(self):

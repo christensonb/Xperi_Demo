@@ -31,7 +31,7 @@ def delete(account_id, user_id):
     :param user_id:    int of the user_id to grant access
     :return:           Access dict
     """
-    access = Access.query.filter(account_id=account_id, user_id=user_id).first()
+    access = Access.query.filter_by(account_id=account_id, user_id=user_id).first()
     if access is None:
         raise NotFoundException("User %s doesn't have access to account %s" % (user_id, account_id))
 

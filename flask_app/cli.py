@@ -18,7 +18,7 @@ from flask_app.settings.global_import import setup_flask
 from flask_app import endpoints
 from logging import log
 from seaborn.logger import setup_log_level
-
+import time
 setup_log_level("ERROR")
 
 
@@ -51,6 +51,7 @@ class CommandLineInterpretorDemo(object):
                         self.mock_input[0] != "What do you want to do: 0":
             print(self.mock_input[0])
             answer = self.mock_input.pop(0).split(':', 1)[1]
+            time.sleep(2)
         else:
             answer = input(question)
         if self.store_input != None:
@@ -58,8 +59,7 @@ class CommandLineInterpretorDemo(object):
         return answer
 
     def clear(self):
-        pass
-        # os.system('clear')
+        os.system('clear')
 
     def print_options(self, options, message, padding=5):
         """ This will print the menu options and return the users choice
@@ -114,13 +114,13 @@ class CommandLineInterpretorDemo(object):
             thread.start_new_thread(run, ())
 
         self.admin = Connection('Admin-User', self.local_data.admin_password, 'user/login', base_uri=self.SERVER)
-        self.conn = self.admin
+        self.conn = Connection('Demo-User', self.local_data.user_password, 'user/login', base_uri=self.SERVER)
         self.clear()
 
     def run(self):
         """ This is the main loop of the program that executes the user's menu choices """
         self.setup_server()
-        options = ["Quit", "Login as User", "Create User", "List All Users",
+        options = ["Quit", "Login as User", "Create User", "List All Users","Get Current User",
                    "Create Account", "List All Accounts", "List User Accounts",
                    "Create Access", "List Account Access",
                    "Create Transfer", "List All Transfers", "List Account Transfers"]
@@ -153,6 +153,9 @@ class CommandLineInterpretorDemo(object):
 
     def list_all_users(self):
         return self.admin.user.array.get()
+
+    def get_current_user(self):
+        return self.conn.user.get()
 
     def create_account(self):
         return self.conn.account.put(self.input("name: "))

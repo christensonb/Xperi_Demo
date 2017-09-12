@@ -1,3 +1,33 @@
+What do you want to do: 1
+username: Ben
+password: xperi
+What do you want to do: 2
+username: renee
+password: xperi
+What do you want to do: 3
+What do you want to do: 4
+What do you want to do: 5
+name: finally
+What do you want to do: 6
+What do you want to do: 7
+What do you want to do: 8
+account_id: 4
+user_id: 8
+What do you want to do: 9
+account_id: 4
+What do you want to do: 10
+withdraw_account_id: 
+deposit_account_id: 4
+amount to transfer: 100
+What do you want to do: 10
+withdraw_account_id: 4
+deposit_account_id: 3
+amount to transfer: 50
+What do you want to do: 10
+withdraw_account_id: 4
+deposit_account_id: 
+amount to transfer: 20
 What do you want to do: 11
-account_id: 3
+What do you want to do: 12
+account_id: 4
 What do you want to do: 0

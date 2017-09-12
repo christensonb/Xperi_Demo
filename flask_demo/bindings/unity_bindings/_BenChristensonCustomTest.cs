@@ -366,6 +366,7 @@ namespace demo.BenChristenson.placeholder
         
 
         public static void AccountArrayGet(
+            bool primary = false,                   // bool if True will only reutnr accounts the user is primary on
             int? offset = null,                     // int of the offset to use
             int? limit = null)                      // int of max number of puzzles to return
         {   
@@ -378,7 +379,7 @@ namespace demo.BenChristenson.placeholder
             if(m_logLevel>3)
                 Debug.Log(Prefix()+"AccountArrayGet started");
 
-            benChristenson.accountArrayGet.Spawn(offset, limit, 
+            benChristenson.accountArrayGet.Spawn(primary, offset, limit, 
                                        Callback: new Action<operations.AccountArrayGet, HttpResponse> ((operation, response) =>
             {
                 try

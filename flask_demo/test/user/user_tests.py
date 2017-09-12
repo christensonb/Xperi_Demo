@@ -17,7 +17,7 @@ class UserTest(BaseTest):
         self.assertEqual(email, user['email'], 'Failed to get the email')
         ben.user.login.email.post(email, ben._password)
 
-    def test_user_update_username(self, username='ben'):
+    def test_user_update_username(self, username='Ben'):
         ben = self.test_user_signup(username)
         updated_name = '%s_updated' % username
         user = ben.user.post(username=updated_name)
@@ -27,7 +27,7 @@ class UserTest(BaseTest):
         ben.user.login.post(updated_name, ben._password)
         user = ben.user.post(username=username)
 
-    def test_user_update_password(self, username='password_update'):
+    def test_user_update_password(self, username='Ali'):
         updated_password = '%s_updated' % self.local_data.user_password
         conn = self.test_user_signup(username, self.local_data.user_password)
         user = conn.user.post(password=updated_password)

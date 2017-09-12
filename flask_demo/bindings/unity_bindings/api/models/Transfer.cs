@@ -14,7 +14,8 @@ namespace demo.BenChristenson.models
 {
 	public class Transfer
 	{
-	    public int user_id;
+	    public int transfer_id;
+        public int user_id;
         public int deposit_account_id;
         public string deposit_account_name;
         public int withdraw_account_id;
@@ -26,7 +27,7 @@ namespace demo.BenChristenson.models
         public override string ToString()
         {
             string ret = "Transfer: ";
-            ret += "user_id <'"+user_id.ToString()+"'> ";
+            ret += "transfer_id <'"+transfer_id.ToString()+"'> ";
             return ret;
         }
 
@@ -37,6 +38,7 @@ namespace demo.BenChristenson.models
 
             Transfer ret = new Transfer();
             Crypto crypto = new Crypto(text, encryption, includeLabel);
+            ret.transfer_id = crypto.GetInt();
             ret.user_id = crypto.GetInt();
             ret.deposit_account_id = crypto.GetInt();
             ret.deposit_account_name = crypto.GetString();
@@ -51,6 +53,7 @@ namespace demo.BenChristenson.models
         public string Serialize(string encryption="", bool? includeLabel = null)
         {
             Crypto crypto = new Crypto("", encryption, includeLabel);
+            crypto.AddInt(transfer_id,"transfer_id");
             crypto.AddInt(user_id,"user_id");
             crypto.AddInt(deposit_account_id,"deposit_account_id");
             crypto.AddString(deposit_account_name,"deposit_account_name");

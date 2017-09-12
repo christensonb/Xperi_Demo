@@ -18,15 +18,41 @@ def get(account_id):
     return account
 
 
-@ACCOUNT.route('/account/array', methods=['GET'])
-@api_endpoint(auth='User')
-def get_array(limit=None, offset=None):
+@ACCOUNT.route('/account/admin/array', methods=['GET'])
+@api_endpoint(auth='Admin')
+def get_all_array(limit=None, offset=None):
     """
     :param offset: int of the offset to use
     :param limit:  int of max number of puzzles to return
     :return:       list of Account dict the current user has access to
     """
-    query = Account.query.join(Access).filter(Access.user_id == current_user.user_id)
+    query = Account.query
+    if offset is not None and offset < 0:
+        offset += query.count()
+
+    if offset:
+        query = query.offset(offset)
+
+    if limit:
+        query = query.limit(limit)
+
+    accounts = query.all()
+    return accounts
+
+@ACCOUNT.route('/account/array', methods=['GET'])
+@api_endpoint(auth='User')
+def get_array(primary= False, limit=None, offset=None):
+    """
+    :param primary: bool if True will only reutnr accounts the user is primary on
+    :param offset: int of the offset to use
+    :param limit:  int of max number of puzzles to return
+    :return:       list of Account dict the current user has access to
+    """
+    query = Account.query
+    if primary:
+        query = query.filter_by(user_id=current_user.user_id)
+    else:
+        query = query.join(Access).filter(Access.user_id == current_user.user_id)
     if offset is not None and offset < 0:
         offset += query.count()
 

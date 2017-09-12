@@ -26,7 +26,8 @@ namespace demo.BenChristenson.behaviors
 		public bool DestroyOnComplete = false;
 	    private Action<operations.AccountArrayGet, HttpResponse>  Callback;
 
-	    public int? offset;                     // int of the offset to use
+	    public bool? primary = false;           // bool if True will only reutnr accounts the user is primary on
+        public int? offset;                     // int of the offset to use
         public int? limit;                      // int of max number of puzzles to return
 
 		public List<models.Account> responseData; // list of Account dict the current user has access to
@@ -55,11 +56,12 @@ namespace demo.BenChristenson.behaviors
 			}
 		}
 
-		public void Spawn(int? offset, int? limit, Action<operations.AccountArrayGet, HttpResponse> Callback)
+		public void Spawn(bool? primary, int? offset, int? limit, Action<operations.AccountArrayGet, HttpResponse> Callback)
 		{ // this will spawn a thread to handle the rest call and return immediately
 			count += 1;
 			this.Callback = Callback;
-			this.offset = offset;
+			this.primary = primary;
+            this.offset = offset;
             this.limit = limit;
 
  			StartCoroutine(this.ExecuteAndWait());
@@ -72,10 +74,11 @@ namespace demo.BenChristenson.behaviors
 			}*/
 		}
 
-		public List<models.Account> Run(int? offset, int? limit)
+		public List<models.Account> Run(bool? primary, int? offset, int? limit)
 		{ // this will block until complete
 			count += 1;
-			this.offset = offset;
+			this.primary = primary;
+            this.offset = offset;
             this.limit = limit;
 			ExecutableCode();
 			return responseData;
@@ -83,7 +86,7 @@ namespace demo.BenChristenson.behaviors
 
 		public override void ExecutableCode()
 		{
-			new operations.AccountArrayGet().SetParameters(offset, limit).Send(OnSuccess, OnFail, OnComplete);
+			new operations.AccountArrayGet().SetParameters(primary, offset, limit).Send(OnSuccess, OnFail, OnComplete);
 		}
 
         public void Destroy()

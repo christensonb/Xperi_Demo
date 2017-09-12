@@ -3,7 +3,7 @@ from .account_access import *
 from seaborn.rest.intellisense import *
 
 
-class Account_Array(Endpoint):
+class Account_Admin_Array(Endpoint):
 
     def get(self, limit=None, offset=None):
         """
@@ -11,11 +11,31 @@ class Account_Array(Endpoint):
         :param limit:  int of max number of puzzles to return
         :return:       list of Account dict the current user has access to
         """
-        return self.connection.get('account/array', limit=limit, offset=offset)
+        return self.connection.get('account/admin/array', limit=limit, offset=offset)
+
+
+class Account_Array(Endpoint):
+
+    def get(self, primary=False, limit=None, offset=None):
+        """
+        :param primary: bool if True will only reutnr accounts the user is primary on
+        :param offset: int of the offset to use
+        :param limit:  int of max number of puzzles to return
+        :return:       list of Account dict the current user has access to
+        """
+        return self.connection.get('account/array',
+                                   primary=primary,
+                                   limit=limit,
+                                   offset=offset)
+
+
+class Account_Admin(Endpoint):
+    array = Account_Admin_Array()
 
 
 class Account(Endpoint):
     access = Account_Access()
+    admin = Account_Admin()
     array = Account_Array()
     transfer = Account_Transfer()
 

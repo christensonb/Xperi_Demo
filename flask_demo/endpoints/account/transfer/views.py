@@ -22,6 +22,27 @@ def get(transfer_id):
         raise UnauthorizedException("User is not a member of the accounts involved in this transfer")
     return transfer
 
+@TRANSFER.route('/account/transfer/admin/array', methods=['GET'])
+@api_endpoint(auth='Admin')
+def get_admin_array(limit=None, offset=None):
+    """
+    :param offset:         int of the offset to use
+    :param limit:          int of max number of puzzles to return
+    :return:               list of Transfer dict
+    """
+    query = Transfer.query
+    if offset is not None and offset < 0:
+        offset += query.count()
+
+    if offset:
+        query = query.offset(offset)
+
+    if limit:
+        query = query.limit(limit)
+
+    transfers = query.all()
+    return transfers
+
 
 @TRANSFER.route('/account/transfer/array', methods=['GET'])
 @api_endpoint(auth='User')

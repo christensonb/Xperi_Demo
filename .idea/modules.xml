@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Xperi.iml" filepath="$PROJECT_DIR$/.idea/Xperi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/xperi_demo.iml" filepath="$PROJECT_DIR$/.idea/xperi_demo.iml" />
     </modules>
   </component>
 </project>

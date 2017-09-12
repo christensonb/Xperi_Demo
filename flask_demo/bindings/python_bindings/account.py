@@ -18,7 +18,7 @@ class Account_Array(Endpoint):
 
     def get(self, primary=False, limit=None, offset=None):
         """
-        :param primary: bool if True will only reutnr accounts the user is primary on
+        :param primary: bool if True will only return accounts the user is primary on
         :param offset: int of the offset to use
         :param limit:  int of max number of puzzles to return
         :return:       list of Account dict the current user has access to

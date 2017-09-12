@@ -26,7 +26,7 @@ namespace demo.BenChristenson.behaviors
 		public bool DestroyOnComplete = false;
 	    private Action<operations.AccountTransferWithdrawPut, HttpResponse>  Callback;
 
-	    public int withdraw_acount_id;          // int of the account_id to withdraw the money from
+	    public int withdraw_account_id;         // int of the account_id to withdraw the money from
         public float amount;                    // float of the amount to transfer
 
 		public models.Transfer responseData;    // Transfer dict
@@ -55,11 +55,11 @@ namespace demo.BenChristenson.behaviors
 			}
 		}
 
-		public void Spawn(int withdraw_acount_id, float amount, Action<operations.AccountTransferWithdrawPut, HttpResponse> Callback)
+		public void Spawn(int withdraw_account_id, float amount, Action<operations.AccountTransferWithdrawPut, HttpResponse> Callback)
 		{ // this will spawn a thread to handle the rest call and return immediately
 			count += 1;
 			this.Callback = Callback;
-			this.withdraw_acount_id = withdraw_acount_id;
+			this.withdraw_account_id = withdraw_account_id;
             this.amount = amount;
 
  			StartCoroutine(this.ExecuteAndWait());
@@ -72,10 +72,10 @@ namespace demo.BenChristenson.behaviors
 			}*/
 		}
 
-		public models.Transfer Run(int withdraw_acount_id, float amount)
+		public models.Transfer Run(int withdraw_account_id, float amount)
 		{ // this will block until complete
 			count += 1;
-			this.withdraw_acount_id = withdraw_acount_id;
+			this.withdraw_account_id = withdraw_account_id;
             this.amount = amount;
 			ExecutableCode();
 			return responseData;
@@ -83,7 +83,7 @@ namespace demo.BenChristenson.behaviors
 
 		public override void ExecutableCode()
 		{
-			new operations.AccountTransferWithdrawPut().SetParameters(withdraw_acount_id, amount).Send(OnSuccess, OnFail, OnComplete);
+			new operations.AccountTransferWithdrawPut().SetParameters(withdraw_account_id, amount).Send(OnSuccess, OnFail, OnComplete);
 		}
 
         public void Destroy()
@@ -102,7 +102,7 @@ namespace demo.BenChristenson.behaviors
 		public bool DestroyOnComplete = false;
 	    private Action<operations.AccountTransferDepositPut, HttpResponse>  Callback;
 
-	    public int deposit_account_id;          // int of the account_id to deposit the moeny to
+	    public int deposit_account_id;          // int of the account_id to deposit the money to
         public float amount;                    // float of the amount to transfer
         public string receipt;                  // str of the validated receipt that money has been received
 
@@ -336,8 +336,8 @@ namespace demo.BenChristenson.behaviors
 		public bool DestroyOnComplete = false;
 	    private Action<operations.AccountTransferPut, HttpResponse>  Callback;
 
-	    public int withdraw_acount_id;          // int of the account_id to withdraw the money from
-        public int deposit_account_id;          // int of the account_id to deposit the moeny to
+	    public int withdraw_account_id;         // int of the account_id to withdraw the money from
+        public int deposit_account_id;          // int of the account_id to deposit the money to
         public float amount;                    // float of the amount to transfer
 
 		public models.Transfer responseData;    // Transfer dict
@@ -366,11 +366,11 @@ namespace demo.BenChristenson.behaviors
 			}
 		}
 
-		public void Spawn(int withdraw_acount_id, int deposit_account_id, float amount, Action<operations.AccountTransferPut, HttpResponse> Callback)
+		public void Spawn(int withdraw_account_id, int deposit_account_id, float amount, Action<operations.AccountTransferPut, HttpResponse> Callback)
 		{ // this will spawn a thread to handle the rest call and return immediately
 			count += 1;
 			this.Callback = Callback;
-			this.withdraw_acount_id = withdraw_acount_id;
+			this.withdraw_account_id = withdraw_account_id;
             this.deposit_account_id = deposit_account_id;
             this.amount = amount;
 
@@ -384,10 +384,10 @@ namespace demo.BenChristenson.behaviors
 			}*/
 		}
 
-		public models.Transfer Run(int withdraw_acount_id, int deposit_account_id, float amount)
+		public models.Transfer Run(int withdraw_account_id, int deposit_account_id, float amount)
 		{ // this will block until complete
 			count += 1;
-			this.withdraw_acount_id = withdraw_acount_id;
+			this.withdraw_account_id = withdraw_account_id;
             this.deposit_account_id = deposit_account_id;
             this.amount = amount;
 			ExecutableCode();
@@ -396,7 +396,7 @@ namespace demo.BenChristenson.behaviors
 
 		public override void ExecutableCode()
 		{
-			new operations.AccountTransferPut().SetParameters(withdraw_acount_id, deposit_account_id, amount).Send(OnSuccess, OnFail, OnComplete);
+			new operations.AccountTransferPut().SetParameters(withdraw_account_id, deposit_account_id, amount).Send(OnSuccess, OnFail, OnComplete);
 		}
 
         public void Destroy()

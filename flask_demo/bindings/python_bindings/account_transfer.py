@@ -14,20 +14,20 @@ class Account_Transfer_Admin_Array(Endpoint):
 
 class Account_Transfer_Withdraw(Endpoint):
 
-    def put(self, withdraw_acount_id, amount):
+    def put(self, withdraw_account_id, amount):
         """
-        :param withdraw_acount_id: int of the account_id to withdraw the money from
-        :param amount:             float of the amount to transfer
-        :return:                   Transfer dict
+        :param withdraw_account_id: int of the account_id to withdraw the money from
+        :param amount:              float of the amount to transfer
+        :return:                    Transfer dict
         """
-        return self.connection.put('account/transfer/withdraw', data=dict(withdraw_acount_id=withdraw_acount_id,           amount=amount))
+        return self.connection.put('account/transfer/withdraw', data=dict(withdraw_account_id=withdraw_account_id,           amount=amount))
 
 
 class Account_Transfer_Deposit(Endpoint):
 
     def put(self, deposit_account_id, amount, receipt):
         """
-        :param deposit_account_id: int of the account_id to deposit the moeny to
+        :param deposit_account_id: int of the account_id to deposit the money to
         :param amount:             float of the amount to transfer
         :param receipt:            str of the validated receipt that money has been received
         :return:                   Transfer dict
@@ -59,7 +59,7 @@ class Account_Transfer_Claim(Endpoint):
 
     def put(self, transfer_id, amount, created_timestamp, receipt):
         """
-        :param transfer_id:        int of the account_id to deposit the moeny to
+        :param transfer_id:        int of the account_id to deposit the money to
         :param amount:             float of the amount to transfer
         :param created_timestamp:  str of the validated receipt that money has been received
         :param receipt:            str of the receipt
@@ -90,14 +90,14 @@ class Account_Transfer(Endpoint):
         """
         return self.connection.get('account/transfer', transfer_id=transfer_id)
 
-    def put(self, withdraw_acount_id, deposit_account_id, amount):
+    def put(self, withdraw_account_id, deposit_account_id, amount):
         """
-        :param withdraw_acount_id: int of the account_id to withdraw the money from
-        :param deposit_account_id: int of the account_id to deposit the moeny to
+        :param withdraw_account_id: int of the account_id to withdraw the money from
+        :param deposit_account_id: int of the account_id to deposit the money to
         :param amount:             float of the amount to transfer
         :return:                   Transfer dict
         """
         return self.connection.put('account/transfer',
-                                   data=dict(withdraw_acount_id=withdraw_acount_id,
+                                   data=dict(withdraw_account_id=withdraw_account_id,
                                              deposit_account_id=deposit_account_id,
                                              amount=amount))

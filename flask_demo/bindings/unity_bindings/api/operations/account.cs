@@ -23,7 +23,7 @@ namespace demo.BenChristenson.operations
 	[HttpPath("BenChristenson","account/array")]
 	public class AccountArrayGet: HttpOperation
 	{
-	    [HttpQueryString] public bool? primary = false;           // bool if True will only reutnr accounts the user is primary on
+	    [HttpQueryString] public bool? primary = false;           // bool if True will only return accounts the user is primary on
         [HttpQueryString] public int? offset;                     // int of the offset to use
         [HttpQueryString] public int? limit;                      // int of max number of puzzles to return
 

@@ -26,7 +26,7 @@ namespace demo.BenChristenson.behaviors
 		public bool DestroyOnComplete = false;
 	    private Action<operations.AccountArrayGet, HttpResponse>  Callback;
 
-	    public bool? primary = false;           // bool if True will only reutnr accounts the user is primary on
+	    public bool? primary = false;           // bool if True will only return accounts the user is primary on
         public int? offset;                     // int of the offset to use
         public int? limit;                      // int of max number of puzzles to return
 

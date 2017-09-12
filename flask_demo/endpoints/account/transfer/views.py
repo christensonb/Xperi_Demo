@@ -79,14 +79,14 @@ def get_array(account_id, withdraws_only=None, limit=None, offset=None):
 
 @TRANSFER.route('/account/transfer', methods=['PUT'])
 @api_endpoint(auth='User', validator=Transfer, add=True, commit=True)
-def create(withdraw_acount_id, deposit_account_id, amount):
+def create(withdraw_account_id, deposit_account_id, amount):
     """
-    :param withdraw_acount_id: int of the account_id to withdraw the money from
-    :param deposit_account_id: int of the account_id to deposit the moeny to
+    :param withdraw_account_id: int of the account_id to withdraw the money from
+    :param deposit_account_id: int of the account_id to deposit the money to
     :param amount:             float of the amount to transfer
     :return:                   Transfer dict
     """
-    query = Account.query.filter_by(account_id=withdraw_acount_id)
+    query = Account.query.filter_by(account_id=withdraw_account_id)
     query = query.join(Access).filter(Access.user_id == current_user.user_id)
     withdraw_account = query.first()
     if withdraw_account is None:
@@ -117,13 +117,13 @@ def create(withdraw_acount_id, deposit_account_id, amount):
 
 @TRANSFER.route('/account/transfer/withdraw', methods=['PUT'])
 @api_endpoint(auth='User', validator=Transfer, add=True, commit=True)
-def create_withdraw(withdraw_acount_id, amount):
+def create_withdraw(withdraw_account_id, amount):
     """
-    :param withdraw_acount_id: int of the account_id to withdraw the money from
-    :param amount:             float of the amount to transfer
-    :return:                   Transfer dict
+    :param withdraw_account_id: int of the account_id to withdraw the money from
+    :param amount:              float of the amount to transfer
+    :return:                    Transfer dict
     """
-    query = Account.query.filter_by(account_id=withdraw_acount_id)
+    query = Account.query.filter_by(account_id=withdraw_account_id)
     query = query.join(Access).filter(Access.user_id == current_user.user_id)
     withdraw_account = query.first()
     if withdraw_account is None:
@@ -147,7 +147,7 @@ def create_withdraw(withdraw_acount_id, amount):
 @api_endpoint(auth='User', validator=Transfer, add=True, commit=True)
 def create_deposit(deposit_account_id, amount, receipt):
     """
-    :param deposit_account_id: int of the account_id to deposit the moeny to
+    :param deposit_account_id: int of the account_id to deposit the money to
     :param amount:             float of the amount to transfer
     :param receipt:            str of the validated receipt that money has been received
     :return:                   Transfer dict
@@ -173,7 +173,7 @@ def create_deposit(deposit_account_id, amount, receipt):
 @api_endpoint(auth='Admin', validator=Transfer, add=True, commit=True)
 def claim(transfer_id, amount, created_timestamp, receipt):
     """
-    :param transfer_id:        int of the account_id to deposit the moeny to
+    :param transfer_id:        int of the account_id to deposit the money to
     :param amount:             float of the amount to transfer
     :param created_timestamp:  str of the validated receipt that money has been received
     :param receipt:            str of the receipt

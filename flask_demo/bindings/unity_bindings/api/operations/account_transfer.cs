@@ -23,15 +23,15 @@ namespace demo.BenChristenson.operations
 	[HttpPath("BenChristenson","account/transfer/withdraw/put")]
 	public class AccountTransferWithdrawPut: HttpOperation
 	{
-	    [HttpFormField] public int withdraw_acount_id;          // int of the account_id to withdraw the money from
+	    [HttpFormField] public int withdraw_account_id;         // int of the account_id to withdraw the money from
         [HttpFormField] public float amount;                    // float of the amount to transfer
 
 		[HttpResponseJsonBody]
 		public models.Transfer responseData;    // Transfer dict
 
-		public AccountTransferWithdrawPut SetParameters(int withdraw_acount_id, float amount)
+		public AccountTransferWithdrawPut SetParameters(int withdraw_account_id, float amount)
 		{
-		    this.withdraw_acount_id = withdraw_acount_id;
+		    this.withdraw_account_id = withdraw_account_id;
             this.amount = amount;
 			return this;
 		}
@@ -47,7 +47,7 @@ namespace demo.BenChristenson.operations
 	[HttpPath("BenChristenson","account/transfer/deposit/put")]
 	public class AccountTransferDepositPut: HttpOperation
 	{
-	    [HttpFormField] public int deposit_account_id;          // int of the account_id to deposit the moeny to
+	    [HttpFormField] public int deposit_account_id;          // int of the account_id to deposit the money to
         [HttpFormField] public float amount;                    // float of the amount to transfer
         [HttpFormField] public string receipt;                  // str of the validated receipt that money has been received
 
@@ -123,16 +123,16 @@ namespace demo.BenChristenson.operations
 	[HttpPath("BenChristenson","account/transfer/put")]
 	public class AccountTransferPut: HttpOperation
 	{
-	    [HttpFormField] public int withdraw_acount_id;          // int of the account_id to withdraw the money from
-        [HttpFormField] public int deposit_account_id;          // int of the account_id to deposit the moeny to
+	    [HttpFormField] public int withdraw_account_id;         // int of the account_id to withdraw the money from
+        [HttpFormField] public int deposit_account_id;          // int of the account_id to deposit the money to
         [HttpFormField] public float amount;                    // float of the amount to transfer
 
 		[HttpResponseJsonBody]
 		public models.Transfer responseData;    // Transfer dict
 
-		public AccountTransferPut SetParameters(int withdraw_acount_id, int deposit_account_id, float amount)
+		public AccountTransferPut SetParameters(int withdraw_account_id, int deposit_account_id, float amount)
 		{
-		    this.withdraw_acount_id = withdraw_acount_id;
+		    this.withdraw_account_id = withdraw_account_id;
             this.deposit_account_id = deposit_account_id;
             this.amount = amount;
 			return this;

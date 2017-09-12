@@ -14,7 +14,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Xperi$Unittests_in_AllTest.coverage" NAME="Unittests in AllTest Coverage Results" MODIFIED="1505178993296" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_demo/test" />
+    <SUITE FILE_PATH="coverage/Xperi$Unittests_in_AllTest.coverage" NAME="Unittests in AllTest Coverage Results" MODIFIED="1505185636848" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_demo/test" />
     <SUITE FILE_PATH="coverage/Xperi$Unittests_in_AccountTest.coverage" NAME="Unittests in AccountTest Coverage Results" MODIFIED="1505158857614" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_demo/test/account" />
     <SUITE FILE_PATH="coverage/Xperi$Unittests_in_UserTest.coverage" NAME="Unittests in UserTest Coverage Results" MODIFIED="1505177347060" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_demo/test/user" />
     <SUITE FILE_PATH="coverage/Xperi$Unittest_UserTest_test_user_update_email.coverage" NAME="Unittest UserTest.test_user_update_email Coverage Results" MODIFIED="1505107379545" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_demo/test/user" />
@@ -28,7 +28,7 @@
     <SUITE FILE_PATH="coverage/Xperi$Unittests_in_BaseTest.coverage" NAME="Unittests in BaseTest Coverage Results" MODIFIED="1505106972547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_demo/test" />
     <SUITE FILE_PATH="coverage/Xperi$Unittest_TransferTest_test_account_to_account_transfer.coverage" NAME="Unittest TransferTest.test_account_to_account_transfer Coverage Results" MODIFIED="1505174547002" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_demo/test/account" />
     <SUITE FILE_PATH="coverage/Xperi$Unittest_UserTest_test_user_update_password.coverage" NAME="Unittest UserTest.test_user_update_password Coverage Results" MODIFIED="1505109420209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_demo/test/user" />
-    <SUITE FILE_PATH="coverage/Xperi$manager.coverage" NAME="manager Coverage Results" MODIFIED="1505184493750" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_demo" />
+    <SUITE FILE_PATH="coverage/Xperi$manager.coverage" NAME="manager Coverage Results" MODIFIED="1505185577976" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_demo" />
     <SUITE FILE_PATH="coverage/Xperi$Unittest_TransferTest_test_get_transfers.coverage" NAME="Unittest TransferTest.test_get_transfers Coverage Results" MODIFIED="1505176109068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_demo/test/account" />
     <SUITE FILE_PATH="coverage/Xperi$Unittest_TransferTest_test_account_withdraw_transfer.coverage" NAME="Unittest TransferTest.test_account_withdraw_transfer Coverage Results" MODIFIED="1505174829285" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_demo/test/account" />
     <SUITE FILE_PATH="coverage/Xperi$Unittest_AccountTest_test_create_account.coverage" NAME="Unittest AccountTest.test_create_account Coverage Results" MODIFIED="1505178231421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flask_demo/test/account" />
@@ -84,14 +84,13 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="all_tests.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="all_tests.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/flask_demo/test/all_tests.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+                <state vertical-scroll-proportion="0.19068162">
+                  <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
-                    <marker date="1505178060007" expanded="true" signature="382:433" placeholder="..." />
                   </folding>
                 </state>
               </provider>
@@ -113,7 +112,7 @@
             <entry file="file://$PROJECT_DIR$/flask_demo/endpoints/account/views.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="25" column="48" selection-start-line="25" selection-start-column="48" selection-end-line="25" selection-end-column="48" />
+                  <caret line="45" column="49" selection-start-line="45" selection-start-column="49" selection-end-line="45" selection-end-column="49" />
                   <folding />
                 </state>
               </provider>
@@ -149,11 +148,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/flask_demo/endpoints/account/transfer/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.15716487">
-                  <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="124" column="7" selection-start-line="124" selection-start-column="7" selection-end-line="124" selection-end-column="7" />
                   <folding />
                 </state>
               </provider>
@@ -198,8 +197,8 @@
           <file leaf-file-name="cli.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/flask_demo/cli.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.44992295">
-                  <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.26660913">
+                  <caret line="117" column="29" selection-start-line="117" selection-start-column="29" selection-end-line="117" selection-end-column="29" />
                   <folding>
                     <element signature="e#165#174#0" expanded="true" />
                   </folding>
@@ -272,9 +271,9 @@
         <option value="$PROJECT_DIR$/cli.py" />
         <option value="$PROJECT_DIR$/../seaborn/seaborn/command_line_interpretor/command_line_interpretor.py" />
         <option value="$PROJECT_DIR$/flask_demo/bindings/python_bindings/account_access.py" />
+        <option value="$PROJECT_DIR$/flask_demo/cli.py" />
         <option value="$PROJECT_DIR$/flask_demo/endpoints/account/views.py" />
         <option value="$PROJECT_DIR$/flask_demo/endpoints/account/transfer/views.py" />
-        <option value="$PROJECT_DIR$/flask_demo/cli.py" />
       </list>
     </option>
   </component>
@@ -332,114 +331,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Xperi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flask_demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="endpoints" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Xperi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flask_demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="endpoints" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="user" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Xperi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flask_demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="endpoints" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="account" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Xperi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flask_demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="endpoints" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="account" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="transfer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Xperi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flask_demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="endpoints" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="account" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="access" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Xperi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flask_demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bindings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -465,7 +356,7 @@
       <recent name="D:\Code\Xperi\demo" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.manager">
+  <component name="RunManager" selected="Python tests.Unittests in AllTest">
     <configuration default="false" name="Unittests in AllTest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -773,8 +664,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.manager" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in AllTest" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in AllTest" />
+        <item index="1" class="java.lang.String" itemvalue="Python.manager" />
         <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in TransferTest" />
         <item index="3" class="java.lang.String" itemvalue="Python.run_flask" />
         <item index="4" class="java.lang.String" itemvalue="Python tests.Unittest TransferTest.test_account_deposit_transfer" />
@@ -795,9 +686,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittest_TransferTest_test_account_deposit_transfer - 2017.09.11 at 20h 09m 47s.xml">
-      <configuration name="Unittest TransferTest.test_account_deposit_transfer" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_AllTest - 2017.09.11 at 20h 14m 22s.xml">
       <configuration name="Unittests in AllTest" configurationId="tests" />
     </history-entry>
@@ -816,6 +704,9 @@
     <history-entry file="Unittests_in_AllTest - 2017.09.11 at 20h 16m 36s.xml">
       <configuration name="Unittests in AllTest" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_in_AllTest - 2017.09.11 at 22h 07m 19s.xml">
+      <configuration name="Unittests in AllTest" configurationId="tests" />
+    </history-entry>
     <history-entry file="Unittests_in_TransferTest - 2017.09.11 at 20h 09m 54s.xml">
       <configuration name="Unittests in TransferTest" configurationId="tests" />
     </history-entry>
@@ -830,22 +721,22 @@
     <frame x="0" y="5" width="2608" height="2110" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11616954" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3998989" sideWeight="0.49843013" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962587" sideWeight="0.49843013" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3998989" sideWeight="0.50156987" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11616954" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25328615" sideWeight="0.49529043" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32962587" sideWeight="0.49843013" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32962587" sideWeight="0.50156987" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5141557" sideWeight="0.45211932" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1019,6 +910,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="33" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1036,6 +928,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1207,17 +1100,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flask_demo/test/all_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <marker date="1505178060007" expanded="true" signature="382:433" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/python35/Lib/logging/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.042183623">
@@ -1304,14 +1186,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flask_demo/endpoints/account/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="48" selection-start-line="25" selection-start-column="48" selection-end-line="25" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flask_demo/endpoints/account/access/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1328,18 +1202,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/flask_demo/endpoints/account/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="49" selection-start-line="45" selection-start-column="49" selection-end-line="45" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/flask_demo/endpoints/account/transfer/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15716487">
-          <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="124" column="7" selection-start-line="124" selection-start-column="7" selection-end-line="124" selection-end-column="7" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flask_demo/test/all_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19068162">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/flask_demo/cli.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44992295">
-          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.26660913">
+          <caret line="117" column="29" selection-start-line="117" selection-start-column="29" selection-end-line="117" selection-end-column="29" />
           <folding>
             <element signature="e#165#174#0" expanded="true" />
           </folding>

@@ -46,7 +46,7 @@ namespace demo.BenChristenson.placeholder
         
 
         public static void AccountTransferWithdrawPut(
-            int withdraw_acount_id,                 // int of the account_id to withdraw the money from
+            int withdraw_account_id,                // int of the account_id to withdraw the money from
             float amount)                           // float of the amount to transfer
         {   
             if (benChristenson.accountTransferWithdrawPut == null){
@@ -58,7 +58,7 @@ namespace demo.BenChristenson.placeholder
             if(m_logLevel>3)
                 Debug.Log(Prefix()+"AccountTransferWithdrawPut started");
 
-            benChristenson.accountTransferWithdrawPut.Spawn(withdraw_acount_id, amount, 
+            benChristenson.accountTransferWithdrawPut.Spawn(withdraw_account_id, amount, 
                                        Callback: new Action<operations.AccountTransferWithdrawPut, HttpResponse> ((operation, response) =>
             {
                 try
@@ -85,7 +85,7 @@ namespace demo.BenChristenson.placeholder
         
 
         public static void AccountTransferDepositPut(
-            int deposit_account_id,                 // int of the account_id to deposit the moeny to
+            int deposit_account_id,                 // int of the account_id to deposit the money to
             float amount,                           // float of the amount to transfer
             string receipt)                         // str of the validated receipt that money has been received
         {   
@@ -204,8 +204,8 @@ namespace demo.BenChristenson.placeholder
         
 
         public static void AccountTransferPut(
-            int withdraw_acount_id,                 // int of the account_id to withdraw the money from
-            int deposit_account_id,                 // int of the account_id to deposit the moeny to
+            int withdraw_account_id,                // int of the account_id to withdraw the money from
+            int deposit_account_id,                 // int of the account_id to deposit the money to
             float amount)                           // float of the amount to transfer
         {   
             if (benChristenson.accountTransferPut == null){
@@ -217,7 +217,7 @@ namespace demo.BenChristenson.placeholder
             if(m_logLevel>3)
                 Debug.Log(Prefix()+"AccountTransferPut started");
 
-            benChristenson.accountTransferPut.Spawn(withdraw_acount_id, deposit_account_id, amount, 
+            benChristenson.accountTransferPut.Spawn(withdraw_account_id, deposit_account_id, amount, 
                                        Callback: new Action<operations.AccountTransferPut, HttpResponse> ((operation, response) =>
             {
                 try
@@ -366,7 +366,7 @@ namespace demo.BenChristenson.placeholder
         
 
         public static void AccountArrayGet(
-            bool primary = false,                   // bool if True will only reutnr accounts the user is primary on
+            bool primary = false,                   // bool if True will only return accounts the user is primary on
             int? offset = null,                     // int of the offset to use
             int? limit = null)                      // int of max number of puzzles to return
         {   

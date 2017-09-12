@@ -26,7 +26,7 @@ def get_array(limit=None, offset=None):
     :param limit:  int of max number of puzzles to return
     :return:       list of Account dict the current user has access to
     """
-    query = Account.query.join(Access).filter(Access.user_id==current_user.user_id)
+    query = Account.query.join(Access).filter(Access.user_id == current_user.user_id)
     if offset is not None and offset < 0:
         offset += query.count()
 

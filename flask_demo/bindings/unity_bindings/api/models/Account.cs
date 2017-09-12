@@ -14,14 +14,16 @@ namespace demo.BenChristenson.models
 {
 	public class Account
 	{
-	    public string name;
+	    public int account_id;
+        public string name;
+        public int user_id;
         public float funds;
         public List<int> user_ids;
 
         public override string ToString()
         {
             string ret = "Account: ";
-            ret += "name <'"+name.ToString()+"'> ";
+            ret += "account_id <'"+account_id.ToString()+"'> ";
             return ret;
         }
 
@@ -32,7 +34,9 @@ namespace demo.BenChristenson.models
 
             Account ret = new Account();
             Crypto crypto = new Crypto(text, encryption, includeLabel);
+            ret.account_id = crypto.GetInt();
             ret.name = crypto.GetString();
+            ret.user_id = crypto.GetInt();
             ret.funds = crypto.GetFloat();
             ret.user_ids = crypto.GetListInt();
             return ret;
@@ -41,7 +45,9 @@ namespace demo.BenChristenson.models
         public string Serialize(string encryption="", bool? includeLabel = null)
         {
             Crypto crypto = new Crypto("", encryption, includeLabel);
+            crypto.AddInt(account_id,"account_id");
             crypto.AddString(name,"name");
+            crypto.AddInt(user_id,"user_id");
             crypto.AddFloat(funds,"funds");
             crypto.AddListInt(user_ids,"user_ids");
             return crypto.ToString();

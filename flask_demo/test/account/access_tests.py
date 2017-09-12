@@ -1,7 +1,6 @@
 import os
 import sys
 
-
 flask_folder = os.path.abspath(__file__).replace('\\', '/').rsplit('/test', 1)[0]
 sys.path.append(flask_folder)
 from test.base import *
@@ -15,7 +14,7 @@ class AccessTest(AccountTest):
         try:
             other_user = self.user_signup('Demo-User2')
         except Exception as ex:
-            raise unittest.SkipTest('Exception in User Signup: %s'%ex)
+            raise unittest.SkipTest('Exception in User Signup: %s' % ex)
 
         try:
             other_user.account.access.put(account['account_id'], other_user.user_id)

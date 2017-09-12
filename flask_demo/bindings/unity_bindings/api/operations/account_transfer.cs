@@ -49,16 +49,16 @@ namespace demo.BenChristenson.operations
 	{
 	    [HttpFormField] public int deposit_account_id;          // int of the account_id to deposit the moeny to
         [HttpFormField] public float amount;                    // float of the amount to transfer
-        [HttpFormField] public string deposit_receipt;          // str of the validated receipt that money has been received
+        [HttpFormField] public string receipt;                  // str of the validated receipt that money has been received
 
 		[HttpResponseJsonBody]
 		public models.Transfer responseData;    // Transfer dict
 
-		public AccountTransferDepositPut SetParameters(int deposit_account_id, float amount, string deposit_receipt)
+		public AccountTransferDepositPut SetParameters(int deposit_account_id, float amount, string receipt)
 		{
 		    this.deposit_account_id = deposit_account_id;
             this.amount = amount;
-            this.deposit_receipt = deposit_receipt;
+            this.receipt = receipt;
 			return this;
 		}
 

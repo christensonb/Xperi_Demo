@@ -11,9 +11,9 @@ class AccountTest(BaseTest):
     def test_create_account(self, username="Demo-User", account_name="demo_account"):
         user = self.test_login(username)
         account = user.account.put(name=account_name)
-        self.assertEqual(account['name'], account_name, 'Failed to set name')
-        self.assertEqual(account['user_id'], user.user_id, 'Failed to set user_id')
-        self.assertEqual(account['user_ids'], [user.user_id], 'Failed to set access users')
+        self.assertEqual(account_name, account['name'], 'Failed to set name')
+        self.assertEqual(user.user_id, account['user_id'], 'Failed to set user_id')
+        self.assertEqual([user.user_id], account['user_ids'], 'Failed to set access users')
         return user, account
 
     def test_get_account(self):

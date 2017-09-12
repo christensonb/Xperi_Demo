@@ -2,33 +2,31 @@ from seaborn.rest.intellisense import *
 
 
 class Account_Transfer_Withdraw(Endpoint):
-
     def put(self, withdraw_acount_id, amount):
         """
         :param withdraw_acount_id: int of the account_id to withdraw the money from
         :param amount:             float of the amount to transfer
         :return:                   Transfer dict
         """
-        return self.connection.put('account/transfer/withdraw', data=dict(withdraw_acount_id=withdraw_acount_id,           amount=amount))
+        return self.connection.put('account/transfer/withdraw',
+                                   data=dict(withdraw_acount_id=withdraw_acount_id, amount=amount))
 
 
 class Account_Transfer_Deposit(Endpoint):
-
-    def put(self, deposit_account_id, amount, deposit_receipt):
+    def put(self, deposit_account_id, amount, receipt):
         """
         :param deposit_account_id: int of the account_id to deposit the moeny to
         :param amount:             float of the amount to transfer
-        :param deposit_receipt:    str of the validated receipt that money has been received
+        :param receipt:            str of the validated receipt that money has been received
         :return:                   Transfer dict
         """
         return self.connection.put('account/transfer/deposit',
                                    data=dict(deposit_account_id=deposit_account_id,
                                              amount=amount,
-                                             deposit_receipt=deposit_receipt))
+                                             receipt=receipt))
 
 
 class Account_Transfer_Array(Endpoint):
-
     def get(self, account_id, withdraws_only=None, limit=None, offset=None):
         """
         :param account_id:     int of the account_id to get transfer for
@@ -45,7 +43,6 @@ class Account_Transfer_Array(Endpoint):
 
 
 class Account_Transfer_Claim(Endpoint):
-
     def put(self, transfer_id, amount, created_timestamp, receipt):
         """
         :param transfer_id:        int of the account_id to deposit the moeny to

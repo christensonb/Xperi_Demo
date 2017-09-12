@@ -15,18 +15,18 @@ class UserTest(BaseTest):
         email = email or 'update@%s' % '.'.join(self.configuration.domain.split('.')[-2:])
         ben = self.test_user_signup()
         user = ben.user.post(email=email)
-        self.assertEqual(user['email'], email, 'Failed to set the email')
+        self.assertEqual(email, user['email'], 'Failed to set the email')
         user = ben.user.get()
-        self.assertEqual(user['email'], email, 'Failed to get the email')
+        self.assertEqual(email, user['email'], 'Failed to get the email')
         ben.user.login.email.post(email, ben._password)
 
     def test_user_update_username(self, username='ben'):
         ben = self.test_user_signup(username)
         updated_name = '%s_updated' % username
         user = ben.user.post(username=updated_name)
-        self.assertEqual(user['username'], updated_name, 'Failed to set the username')
+        self.assertEqual(updated_name, user['username'], 'Failed to set the username')
         user = ben.user.get()
-        self.assertEqual(user['username'], updated_name, 'Failed to get the username')
+        self.assertEqual(updated_name, user['username'], 'Failed to get the username')
         ben.user.login.post(updated_name, ben._password)
         user = ben.user.post(username=username)
 
@@ -41,7 +41,7 @@ class UserTest(BaseTest):
         conn = Connection('Demo-User', self.local_data.user_password, base_uri=self.SERVER, timeout=self.TIMEOUT,
                           login_url='user/login')
         user = conn.user.get()
-        self.assertEqual(conn.user_id, user['user_id'], 'Failed to make sure we started out logged in')
+        self.assertEqual(user['user_id'], conn.user_id, 'Failed to make sure we started out logged in')
 
         conn.user.logout.post()
 

@@ -16,10 +16,10 @@ def get(transfer_id):
     :return: Transfer dict
     """
     transfer = Transfer.get(transfer_id)
-    if not (current_user.is_auth('Superuser') or
-                    current_user in transfer.withdraw_account.users or
-                    current_user in transfer.deposit_account.users):
-        raise UnauthorizedException("User is not a member of the accounts effected by this transfer")
+    if not (current_user.is_auth_level('Superuser') or
+                        transfer.withdraw_account is not None and current_user in transfer.withdraw_account.users or
+                        transfer.deposit_account is not None and current_user in transfer.deposit_account.users):
+        raise UnauthorizedException("User is not a member of the accounts involved in this transfer")
     return transfer
 
 
@@ -36,12 +36,12 @@ def get_array(account_id, withdraws_only=None, limit=None, offset=None):
     query = Transfer.query
 
     if withdraws_only is True:
-        query.filter(withdraw_account_id=account_id)
+        query = query.filter_by(withdraw_account_id=account_id)
     if withdraws_only is False:
-        query.filter(deposit_account_id=account_id)
+        query = query.filter_by(deposit_account_id=account_id)
     if withdraws_only is None:
-        query.filter(or_(withdraw_account_id=account_id,
-                         deposit_Account_id=account_id))
+        query = query.filter(or_(Transfer.withdraw_account_id == account_id,
+                                 Transfer.deposit_account_id == account_id))
 
     if offset is not None and offset < 0:
         offset += query.count()
@@ -65,19 +65,19 @@ def create(withdraw_acount_id, deposit_account_id, amount):
     :param amount:             float of the amount to transfer
     :return:                   Transfer dict
     """
-    query = Account.query.filter(account_id=withdraw_acount_id)
-    query = query.join(Access).filter_by(Access.user_id == current_user.user_id)
+    query = Account.query.filter_by(account_id=withdraw_acount_id)
+    query = query.join(Access).filter(Access.user_id == current_user.user_id)
     withdraw_account = query.first()
     if withdraw_account is None:
         raise UnauthorizedException("Current User does not have access to the account")
 
     if withdraw_account.funds < amount:
-        raise PaymentRequiredException("Insufficent funds to do the transfer")
+        raise PaymentRequiredException("Insufficient funds to do the transfer")
 
     if not withdraw_account.is_active:
         raise UnauthorizedException("The withdraw account is not active")
 
-    deposit_account = Account.query.filter(account_id=deposit_account_id)
+    deposit_account = Account.query.filter_by(account_id=deposit_account_id).first()
 
     if deposit_account is None:
         raise NotFoundException("Failed to find deposit account")
@@ -102,14 +102,14 @@ def create_withdraw(withdraw_acount_id, amount):
     :param amount:             float of the amount to transfer
     :return:                   Transfer dict
     """
-    query = Account.query.filter(account_id=withdraw_acount_id)
-    query = query.join(Access).filter_by(Access.user_id == current_user.user_id)
+    query = Account.query.filter_by(account_id=withdraw_acount_id)
+    query = query.join(Access).filter(Access.user_id == current_user.user_id)
     withdraw_account = query.first()
     if withdraw_account is None:
         raise UnauthorizedException("Current User does not have access to the account")
 
     if withdraw_account.funds < amount:
-        raise PaymentRequiredException("Insufficent funds to do the transfer")
+        raise PaymentRequiredException("Insufficient funds to do the transfer")
 
     if not withdraw_account.is_active:
         raise UnauthorizedException("The withdraw account is not active")
@@ -124,14 +124,14 @@ def create_withdraw(withdraw_acount_id, amount):
 
 @TRANSFER.route('/account/transfer/deposit', methods=['PUT'])
 @api_endpoint(auth='User', validator=Transfer, add=True, commit=True)
-def create_deposit(deposit_account_id, amount, deposit_receipt):
+def create_deposit(deposit_account_id, amount, receipt):
     """
     :param deposit_account_id: int of the account_id to deposit the moeny to
     :param amount:             float of the amount to transfer
-    :param deposit_receipt:    str of the validated receipt that money has been received
+    :param receipt:            str of the validated receipt that money has been received
     :return:                   Transfer dict
     """
-    deposit_account = Account.query.filter(account_id=deposit_account_id)
+    deposit_account = Account.query.filter_by(account_id=deposit_account_id).first()
 
     if deposit_account is None:
         raise NotFoundException("Failed to find deposit account")
@@ -139,8 +139,8 @@ def create_deposit(deposit_account_id, amount, deposit_receipt):
     if not deposit_account.is_active:
         raise BadRequestException("The deposit account is not active")
 
-    transfer = Transfer(user_id=current_user.user_id, amount=amount)
-    if not transfer.check_receipt(deposit_receipt):
+    transfer = Transfer(user_id=current_user.user_id, amount=amount, receipt=receipt)
+    if not transfer.check_receipt(receipt):
         raise UnauthorizedException("Deposit Receipt is invalid")
 
     deposit_account.funds += amount

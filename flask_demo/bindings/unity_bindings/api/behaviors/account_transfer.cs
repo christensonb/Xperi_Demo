@@ -104,7 +104,7 @@ namespace demo.BenChristenson.behaviors
 
 	    public int deposit_account_id;          // int of the account_id to deposit the moeny to
         public float amount;                    // float of the amount to transfer
-        public string deposit_receipt;          // str of the validated receipt that money has been received
+        public string receipt;                  // str of the validated receipt that money has been received
 
 		public models.Transfer responseData;    // Transfer dict
 
@@ -132,13 +132,13 @@ namespace demo.BenChristenson.behaviors
 			}
 		}
 
-		public void Spawn(int deposit_account_id, float amount, string deposit_receipt, Action<operations.AccountTransferDepositPut, HttpResponse> Callback)
+		public void Spawn(int deposit_account_id, float amount, string receipt, Action<operations.AccountTransferDepositPut, HttpResponse> Callback)
 		{ // this will spawn a thread to handle the rest call and return immediately
 			count += 1;
 			this.Callback = Callback;
 			this.deposit_account_id = deposit_account_id;
             this.amount = amount;
-            this.deposit_receipt = deposit_receipt;
+            this.receipt = receipt;
 
  			StartCoroutine(this.ExecuteAndWait());
 
@@ -150,19 +150,19 @@ namespace demo.BenChristenson.behaviors
 			}*/
 		}
 
-		public models.Transfer Run(int deposit_account_id, float amount, string deposit_receipt)
+		public models.Transfer Run(int deposit_account_id, float amount, string receipt)
 		{ // this will block until complete
 			count += 1;
 			this.deposit_account_id = deposit_account_id;
             this.amount = amount;
-            this.deposit_receipt = deposit_receipt;
+            this.receipt = receipt;
 			ExecutableCode();
 			return responseData;
 		}
 
 		public override void ExecutableCode()
 		{
-			new operations.AccountTransferDepositPut().SetParameters(deposit_account_id, amount, deposit_receipt).Send(OnSuccess, OnFail, OnComplete);
+			new operations.AccountTransferDepositPut().SetParameters(deposit_account_id, amount, receipt).Send(OnSuccess, OnFail, OnComplete);
 		}
 
         public void Destroy()

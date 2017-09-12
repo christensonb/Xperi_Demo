@@ -87,7 +87,7 @@ namespace demo.BenChristenson.placeholder
         public static void AccountTransferDepositPut(
             int deposit_account_id,                 // int of the account_id to deposit the moeny to
             float amount,                           // float of the amount to transfer
-            string deposit_receipt)                 // str of the validated receipt that money has been received
+            string receipt)                         // str of the validated receipt that money has been received
         {   
             if (benChristenson.accountTransferDepositPut == null){
                 benChristenson.accountTransferDepositPut = m_instance.gameObject.AddComponent<behaviors.AccountTransferDepositPut>();
@@ -98,7 +98,7 @@ namespace demo.BenChristenson.placeholder
             if(m_logLevel>3)
                 Debug.Log(Prefix()+"AccountTransferDepositPut started");
 
-            benChristenson.accountTransferDepositPut.Spawn(deposit_account_id, amount, deposit_receipt, 
+            benChristenson.accountTransferDepositPut.Spawn(deposit_account_id, amount, receipt, 
                                        Callback: new Action<operations.AccountTransferDepositPut, HttpResponse> ((operation, response) =>
             {
                 try

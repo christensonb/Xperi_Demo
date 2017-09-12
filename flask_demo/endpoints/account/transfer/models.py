@@ -22,8 +22,8 @@ class Transfer(db.Model, ApiModel):
 
     @classmethod
     def keys(cls):
-        return ['user_id', 'deposit_account_id', 'deposit_account_name', 'withdraw_account_id', 'withdraw_account_name',
-                'amount', 'created_timestamp', 'receipt']
+        return ['transfer_id', 'user_id', 'deposit_account_id', 'deposit_account_name', 'withdraw_account_id',
+                'withdraw_account_name', 'amount', 'created_timestamp', 'receipt']
 
     @property
     def deposit_account_name(self):

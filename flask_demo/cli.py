@@ -5,6 +5,10 @@
 
     The user inputs can be saved to a file using -o filename at command line
     The user inputs can be mocked from a file using -i filename at command line
+
+    Example:
+        python cli.py -i test\mock_cli_input.txt -o test\mock_cli_input.txt
+
 """
 import os
 from six.moves import input
@@ -24,24 +28,29 @@ class CommandLineInterpretorDemo(object):
 
     def __init__(self, args):
         self.mock_input = []
-        self.store_input = None
+        store_file = None
 
         while len(args) >= 2:
             if args[0] == '-i':
-                self.mock_input = open(args[1], 'r').read().split('\n')
+                if os.path.exists(args[1]):
+                    self.mock_input = open(args[1], 'r').read().split('\n')
                 args = args[2:]
             elif args[0] == '-o':
-                self.store_input = open(args[1], 'w')
+                store_file = args[1]
                 args = args[2:]
             else:
                 args = args[1:]
+
+        self.store_input = store_file and open(store_file,'w') or None
+
         self.anoymous = None
         self.conn = None
 
     def input(self, question):
-        if len(self.mock_input) > 0:
+        if len(self.mock_input) > 0 and self.mock_input[0] != '' and \
+                        self.mock_input[0] != "What do you want to do: 0":
             print(self.mock_input[0])
-            answer = self.mock_input.pop(0).split(':', 1)
+            answer = self.mock_input.pop(0).split(':', 1)[1]
         else:
             answer = input(question)
         if self.store_input != None:
@@ -49,7 +58,8 @@ class CommandLineInterpretorDemo(object):
         return answer
 
     def clear(self):
-        os.system('clear')
+        pass
+        # os.system('clear')
 
     def print_options(self, options, message, padding=5):
         """ This will print the menu options and return the users choice
@@ -59,7 +69,7 @@ class CommandLineInterpretorDemo(object):
         """
         print("\n" * padding)
         for i, option in enumerate(options):
-            print("%s: %s" % (str(i).ljust(3), option))
+            print("%s : %s" % (str(i).rjust(3), option))
         print('')
         ret = self.input(message + ': ')
         if ret.isdigit():
@@ -105,6 +115,7 @@ class CommandLineInterpretorDemo(object):
 
         self.admin = Connection('Admin-User', self.local_data.admin_password, 'user/login', base_uri=self.SERVER)
         self.conn = self.admin
+        self.clear()
 
     def run(self):
         """ This is the main loop of the program that executes the user's menu choices """
@@ -124,19 +135,21 @@ class CommandLineInterpretorDemo(object):
                         self.print_table(options[answer], data)
                 except Exception as ex:
                     print(str(ex))
+            else:
+                self.clear()
 
     def quit(self):
         sys.exit()
 
     def login_as_user(self):
-        user = self.conn.login(self.input('username: '), self.input('password: '), login_url='user/login')
-        self.print_table("Login User", user)
+        self.conn.login(self.input('username: '), self.input('password: '), login_url='user/login')
+        return self.conn.user.get()
 
     def create_user(self):
         username = self.input('username: ')
         password = self.input('password: ')
         self.conn = Connection(username, base_uri=self.SERVER)
-        return self.conn.user.signup.post(username, password)
+        return self.conn.user.signup.put(username, password)
 
     def list_all_users(self):
         return self.admin.user.array.get()
@@ -157,7 +170,7 @@ class CommandLineInterpretorDemo(object):
                                             self.input("user_id: "))
 
     def list_account_access(self):
-        return self.admin.account.access.get(self.input("account_id: "))
+        return self.admin.account.access.array.get(self.input("account_id: "))
 
     def create_transfer(self):
         accounts = self.admin.account.admin.array.get()
@@ -165,7 +178,13 @@ class CommandLineInterpretorDemo(object):
         withdraw_account_id = self.input("withdraw_account_id: ")
         deposit_account_id = self.input("deposit_account_id: ")
         amount = self.input("amount to transfer: ")
-        transfer = self.conn.transfer.put(withdraw_account_id or None, deposit_account_id or None, amount)
+
+        if withdraw_account_id == "":
+            transfer = self.conn.account.transfer.deposit.put(deposit_account_id, amount, "")
+        elif deposit_account_id == "":
+            transfer = self.conn.account.transfer.withdraw.put(withdraw_account_id, amount)
+        else:
+            transfer = self.conn.account.transfer.put(withdraw_account_id, deposit_account_id, amount)
         self.print_table("Create Transfer", transfer)
 
         accounts = []
@@ -180,7 +199,7 @@ class CommandLineInterpretorDemo(object):
         return self.admin.account.transfer.admin.array.get(limit=30, offset=-30)
 
     def list_account_transfers(self):
-        return self.conn.account.transfer.array.get()
+        return self.conn.account.transfer.array.get(self.input("account_id: "))
 
 
 if __name__ == '__main__':

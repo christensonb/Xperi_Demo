@@ -7,7 +7,7 @@ sys.path.append(flask_folder)
 from test.base import *
 
 
-class UserTest(BaseTest):
+class EchoTest(BaseTest):
     def test_echo(self):
         ret = self.conn.echo.get()
         self.assertEquals("Hello Cruel World!", ret)

@@ -9,7 +9,8 @@ from test.base import *
 
 class UserTest(BaseTest):
     def test_user_signup(self, username="Ben", password=None, email=None, delete_if_exists=True):
-        self.user_signup(username, password, email, delete_if_exists=True)
+        user = self.user_signup(username, password, email, delete_if_exists=True)
+        return user
 
     def test_user_update_email(self, email=None):
         email = email or 'update@%s' % '.'.join(self.configuration.domain.split('.')[-2:])

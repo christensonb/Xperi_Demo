@@ -1,5 +1,7 @@
 # Xperi_Demo
-This is a demo challenge for xperi
+This is a demo challenge for xperi, to create a Flask application.
+
+
 Using Python3, implement a simple multi-account bank register.
 It should allow for the number and names of accounts to be
 configured, and should support:
